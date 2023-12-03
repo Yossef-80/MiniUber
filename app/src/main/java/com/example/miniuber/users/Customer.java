@@ -2,7 +2,7 @@ package com.example.miniuber.users;
 
 import java.util.List;
 
-public class Customer extends User  implements TripDetails {
+public class Customer extends User  implements TripDetails,Registeration {
     private String mobilePhone;
 
     public String getMobilePhone() {
@@ -22,5 +22,10 @@ public class Customer extends User  implements TripDetails {
     @Override
     public List<Trip> viewTripDetails() {
         return null;
+    }
+
+    @Override
+    public boolean Register(String name, String email, String password, String mobilePhone) {
+        return false;
     }
 }
