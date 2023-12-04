@@ -15,12 +15,17 @@ public class Customer extends User  implements TripDetails,Registeration {
 
     @Override
     public boolean Login(String userName, String password) {
+        //TODO -customer login
         return false;
     }
 
 
+    public void bookCar()
+    {
+        //TODO -customer books car
+    }
     @Override
-    public List<Trip> viewTripDetails() {
+    public List<Trip> viewTripsDetails() {
         return null;
     }
 

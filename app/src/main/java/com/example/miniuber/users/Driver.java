@@ -7,6 +7,16 @@ public class Driver extends User implements TripDetails{
     private Car car;
     private String mobilePhone;
 
+    public float getRate() {
+        return rate;
+    }
+
+    public void setRate(float rate) {
+        this.rate = rate;
+    }
+
+    private float rate;
+
     public boolean isHasACar() {
         return hasACar;
     }
@@ -33,12 +43,19 @@ public class Driver extends User implements TripDetails{
 
     @Override
     public boolean Login(String userName, String password) {
+        //TODO -create login for driver
         return false;
     }
 
 
     @Override
-    public List<Trip> viewTripDetails() {
+    public List<Trip> viewTripsDetails() {
+        //TODO -create view trips details
+        return null;
+    }
+    public List<Trip> searchAvailableTrips()
+    {
+     //TODO -create view trip details
         return null;
     }
 }

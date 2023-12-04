@@ -9,6 +9,7 @@ public class Trip {
     private String tripTime;
     public int calcFare(String pickPoint,String destination)
     {
+        //TODO -calc fare
         //we can add facade here by each city with fare(cairo =>3EGP/km,alex =>2EGP/km,etc)
         //,then get the distance between pick and distnation
         //then add fare price depend on model of the car
