@@ -29,7 +29,7 @@ public class loginChoice extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent intent=new Intent(loginChoice.this, MainActivity.class);
+                Intent intent=new Intent(loginChoice.this, BookCarActivity.class);
                 startActivity(intent);
             }
         });

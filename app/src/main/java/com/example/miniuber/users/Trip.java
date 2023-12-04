@@ -1,7 +1,7 @@
 package com.example.miniuber.users;
 
 public class Trip {
-    private Customer customer;
+    private String customer;
     private Driver driver;
     private String pickPoint;
     private String destination;
@@ -19,11 +19,11 @@ public class Trip {
     }
 
 
-    public Customer getCustomer() {
+    public String getCustomer() {
         return customer;
     }
 
-    public void setCustomer(Customer customer) {
+    public void setCustomer(String customer) {
         this.customer = customer;
     }
 
