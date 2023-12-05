@@ -13,6 +13,9 @@
         android:theme="@style/Theme.MiniUber"
         tools:targetApi="31">
         <activity
+            android:name=".ViewPreviousTrips"
+            android:exported="false" />
+        <activity
             android:name=".ViewAndUpdateDetails"
             android:exported="false" />
         <activity

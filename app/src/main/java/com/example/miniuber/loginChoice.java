@@ -33,6 +33,13 @@ public class loginChoice extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        DriverCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(loginChoice.this, ViewPreviousTrips.class);
+                startActivity(intent);
+            }
+        });
 
     }
 }

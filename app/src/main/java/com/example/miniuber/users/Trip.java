@@ -12,6 +12,9 @@ public class Trip {
     private String destination;
     private int carFare;
     private String tripTime;
+
+
+    private int rate;
     public double calcFare(Address pickpoint,Address destination)
     {
         //TODO -calc fare
@@ -26,6 +29,13 @@ public class Trip {
         return distance.calcPrice();
     }
 
+    public int getRate() {
+        return rate;
+    }
+
+    public void setRate(int rate) {
+        this.rate = rate;
+    }
 
 
     public boolean isHasADriver() {
