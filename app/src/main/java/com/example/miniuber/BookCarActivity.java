@@ -15,6 +15,7 @@ public class BookCarActivity extends AppCompatActivity {
 
     private SearchView pickPoint,destination;
     private MaterialButton pickTimeBtn,ConfirmBtn;
+    Address pickPointAd,destinationAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,15 +26,14 @@ public class BookCarActivity extends AppCompatActivity {
         destination=findViewById(R.id.DestinationSearch);
         pickTimeBtn=findViewById(R.id.timeButton);
         ConfirmBtn=findViewById(R.id.confirmButton);
-
         TripFacade tripFacade = new TripFacade();
         pickPoint.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
 
-                Address address = tripFacade.getCoordinates(query, BookCarActivity.this);
+                 pickPointAd = tripFacade.getCoordinates(query, BookCarActivity.this);
 
-                    Toast.makeText(BookCarActivity.this, " address "+address.getAddressLine(0), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(BookCarActivity.this, " address "+pickPointAd.getAddressLine(0), Toast.LENGTH_LONG).show();
 
 
 
@@ -48,8 +48,8 @@ public class BookCarActivity extends AppCompatActivity {
         destination.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                Address address= tripFacade.getCoordinates(query,BookCarActivity.this);
-                Toast.makeText(BookCarActivity.this, "address: "+address.getAddressLine(0), Toast.LENGTH_SHORT).show();
+                 destinationAd= tripFacade.getCoordinates(query,BookCarActivity.this);
+                Toast.makeText(BookCarActivity.this, "address: "+destinationAd.getAddressLine(0), Toast.LENGTH_LONG).show();
                 return false;
             }
 
@@ -68,7 +68,7 @@ public class BookCarActivity extends AppCompatActivity {
         ConfirmBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                tripFacade.CreateTrip(pickPointAd,destinationAd);
             }
         });
 

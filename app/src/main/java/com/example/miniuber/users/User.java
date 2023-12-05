@@ -1,6 +1,6 @@
 package com.example.miniuber.users;
 
-public abstract class  User implements Cloneable{
+public abstract class  User  {
 
     private String id;
     private String name;

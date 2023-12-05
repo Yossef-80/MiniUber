@@ -1,23 +1,40 @@
 package com.example.miniuber.users;
 
+import android.location.Address;
+
+import com.example.miniuber.users.trip.CalcTripDistance;
+
 public class Trip {
+    boolean hasADriver;
     private String customer;
     private Driver driver;
     private String pickPoint;
     private String destination;
     private int carFare;
     private String tripTime;
-    public int calcFare(String pickPoint,String destination)
+    public double calcFare(Address pickpoint,Address destination)
     {
         //TODO -calc fare
+        CalcTripDistance distance= new CalcTripDistance();
+        distance.TripDistance(pickpoint,destination);
+
         //we can add facade here by each city with fare(cairo =>3EGP/km,alex =>2EGP/km,etc)
         //,then get the distance between pick and distnation
         //then add fare price depend on model of the car
         //then add discount price to the trip
         //then calculate the cumulative Fare
-        return 0;
+        return distance.calcPrice();
     }
 
+
+
+    public boolean isHasADriver() {
+        return hasADriver;
+    }
+
+    public void setHasADriver(boolean hasADriver) {
+        this.hasADriver = hasADriver;
+    }
 
     public String getCustomer() {
         return customer;

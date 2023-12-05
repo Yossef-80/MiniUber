@@ -54,15 +54,15 @@ public class TripFacade {
 
             timePickerDialog.show();
 
-
         }
-        public void CreateTrip(String pickPoint,String destination)
+        public void CreateTrip(Address pickPoint,Address destination)
         {
             Trip trip=new Trip();
-            trip.setCustomer("");
+            trip.setCustomer("1");
             trip.setTripTime(tripTime);
-            trip.setPickPoint(pickPoint);
-            trip.setDestination(destination);
+            trip.setPickPoint(pickPoint.getAddressLine(0));
+            trip.setDestination(destination.getAddressLine(0));
+            trip.calcFare(pickPoint,destination);
 
 
 

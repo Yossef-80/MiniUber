@@ -33,4 +33,8 @@ public class Customer extends User  implements TripDetails,Registeration {
     public boolean Register(String name, String email, String password, String mobilePhone) {
         return false;
     }
+    public boolean UpdatePersonalInfo(String name, String email, String password, String mobilePhone)
+    {
+        return false;
+    }
 }
