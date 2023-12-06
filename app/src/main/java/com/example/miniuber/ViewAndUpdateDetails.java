@@ -7,24 +7,28 @@ import android.view.View;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 public class ViewAndUpdateDetails extends AppCompatActivity {
     TextInputEditText Name,Email,Password,Phone,ConfirmPassword;
+    TextInputLayout ConfirmPasswordBox;
     MaterialButton SaveBtn,EditBtn,ChangePasswordBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_and_update_details);
 
-        Name=findViewById(R.id.nameEditText);
+
+        setContentView(R.layout.activity_view_update_details);
+          Name=findViewById(R.id.nameEditText);
         Email=findViewById(R.id.editTextTextEmailAddress);
         Password=findViewById(R.id.editPassword);
         Phone=findViewById(R.id.phoneEditText);
-
+        ConfirmPassword=findViewById(R.id.confirmPassword);
         SaveBtn=findViewById(R.id.Savebutton);
 
         EditBtn=findViewById(R.id.editInfoBtn);
         ChangePasswordBtn=findViewById(R.id.ChangePasswordBtn);
+        ConfirmPasswordBox=findViewById(R.id.passwordConfirmLayout);
         //DataBase
         Name.setText("");
         Email.setText("");
@@ -59,7 +63,8 @@ public class ViewAndUpdateDetails extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Password.setEnabled(true);
-                ChangePasswordBtn.setVisibility(View.VISIBLE);
+               ConfirmPasswordBox.setVisibility(View.VISIBLE);
+               ConfirmPassword.setEnabled(true);
             }
         });
 

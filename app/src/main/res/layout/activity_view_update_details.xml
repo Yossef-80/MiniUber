@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    tools:context=".ViewAndUpdateDetails">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="40dp"
+        android:enabled="false"
+
+        android:hint="Name"
+
+        app:boxStrokeColor="@color/black"
+        app:hintTextColor="@color/black">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/nameEditText"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="20dp"
+        android:enabled="false"
+        android:hint="Email"
+        app:boxStrokeColor="@color/black"
+        app:hintTextColor="@color/black">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextTextEmailAddress"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:enabled="false"
+
+        android:hint="Mobile Phone"
+        app:boxStrokeColor="@color/black"
+
+        app:hintTextColor="@color/black">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/phoneEditText"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginHorizontal="10dp"
+        android:enabled="false"
+        android:hint="Password"
+        app:boxStrokeColor="@color/black"
+        app:hintTextColor="@color/black"
+        app:passwordToggleEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editPassword"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:id="@+id/passwordConfirmLayout"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:enabled="false"
+        android:hint="Confirm Password"
+        android:layout_marginBottom="30dp"
+        android:visibility="invisible"
+
+        app:boxStrokeColor="@color/black"
+        app:hintTextColor="@color/black">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/confirmPassword"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.button.MaterialButton
+
+        android:id="@+id/Savebutton"
+
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginHorizontal="10dp"
+
+        android:text="SAVE"
+        android:backgroundTint="@color/black"
+        app:rippleColor="@color/black"
+        app:strokeColor="@color/black" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/editInfoBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_margin="10dp"
+                android:backgroundTint="@color/black"
+                android:text="Edit information"
+
+
+                android:textColor="@color/white"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+
+                android:id="@+id/ChangePasswordBtn"
+
+                android:layout_width="wrap_content"
+
+                android:layout_height="60dp"
+                android:layout_margin="10dp"
+                android:backgroundTint="@color/black"
+                android:text="Change Password"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:rippleColor="@color/black"
+                app:strokeColor="@color/black" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</LinearLayout>

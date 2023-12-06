@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group
+        android:id="@+id/group1"
+
+        android:enabled="true"
+        android:checkableBehavior="single">
+        <item
+
+            android:id="@+id/ComplaintItem"
+            android:icon="@drawable/complaint_24"
+
+            android:title="Make Complaint"
+
+            android:checked="true" ></item>
+        <item
+            android:id="@+id/PreviousTripItem"
+            android:icon="@drawable/baseline_directions_car_24"
+            android:title="Previous trips" ></item>
+        <item
+
+            android:id="@+id/updateInfoItem"
+            android:icon="@drawable/baseline_update_24"
+            android:title="Update information" ></item>
+        <item
+
+            android:id="@+id/logOutItem"
+            android:icon="@drawable/baseline_logout_24"
+            android:title="Log Out" ></item>
+    </group>
+
+</menu>
