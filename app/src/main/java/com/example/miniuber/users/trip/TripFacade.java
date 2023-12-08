@@ -8,16 +8,16 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.miniuber.users.Trip;
+import com.example.miniuber.users.TripCreation;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.List;
 
-public class TripFacade {
+public class TripFacade   {
        Address address;
        Geocoder geocoder;
-       LatLng latLng=null;
         String tripTime;
         public Address getCoordinates(String query, Context context){
             String location=query.toString();
@@ -55,16 +55,5 @@ public class TripFacade {
             timePickerDialog.show();
 
         }
-        public void CreateTrip(Address pickPoint,Address destination)
-        {
-            Trip trip=new Trip();
-            trip.setCustomer("1");
-            trip.setTripTime(tripTime);
-            trip.setPickPoint(pickPoint.getAddressLine(0));
-            trip.setDestination(destination.getAddressLine(0));
-            trip.calcFare(pickPoint,destination);
 
-
-
-        }
 }

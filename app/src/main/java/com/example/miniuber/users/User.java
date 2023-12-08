@@ -1,5 +1,7 @@
 package com.example.miniuber.users;
 
+import com.example.miniuber.Register;
+
 public abstract class  User  {
 
     private String id;
@@ -40,6 +42,7 @@ public abstract class  User  {
     }
 
     public  abstract boolean Login(String userName, String password);
+    public abstract boolean Register();
 
 
 }

@@ -47,6 +47,11 @@ public class Driver extends User implements TripDetails{
         return false;
     }
 
+    @Override
+    public boolean Register() {
+        return false;
+    }
+
 
     @Override
     public List<Trip> viewTripsDetails() {
@@ -58,4 +63,5 @@ public class Driver extends User implements TripDetails{
      //TODO -create view trip details
         return null;
     }
+
 }

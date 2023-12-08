@@ -16,7 +16,7 @@ public class UserFactory {
         }
         else if(user.equalsIgnoreCase("employee"))
         {
-            userObj=new Admin();
+            userObj=new Employee();
              return userObj;
         }
         else{

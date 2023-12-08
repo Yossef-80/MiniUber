@@ -2,7 +2,7 @@ package com.example.miniuber.users;
 
 import java.util.List;
 
-public class Customer extends User  implements TripDetails,Registeration {
+public class Customer extends User  implements TripDetails {
     private String mobilePhone;
 
     public String getMobilePhone() {
@@ -30,7 +30,7 @@ public class Customer extends User  implements TripDetails,Registeration {
     }
 
     @Override
-    public boolean Register(String name, String email, String password, String mobilePhone) {
+    public boolean Register() {
         return false;
     }
     public boolean UpdatePersonalInfo(String name, String email, String password, String mobilePhone)

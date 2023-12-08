@@ -13,16 +13,31 @@
         android:theme="@style/Theme.MiniUber"
         tools:targetApi="31">
         <activity
+            android:name=".ShowComplaints"
+            android:exported="false" />
+        <activity
+            android:name=".AddCar"
+            android:exported="false" />
+        <activity
+            android:name=".RegisterDriver"
+            android:exported="false" />
+        <activity
+            android:name=".EmployeeMainPage"
+            android:exported="false" />
+        <activity
+            android:name=".Register"
+            android:exported="false" />
+        <activity
             android:name=".ViewPreviousTrips"
             android:exported="false" />
         <activity
             android:name=".ViewAndUpdateDetails"
             android:exported="false" />
         <activity
-            android:name=".BookCarActivity"
+            android:name=".BookCar"
             android:exported="false" />
         <activity
-            android:name=".loginChoice"
+            android:name=".UserTypeChoice"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,7 +46,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".Login"
             android:exported="false" />
     </application>
 

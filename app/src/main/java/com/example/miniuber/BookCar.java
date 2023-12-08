@@ -4,13 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
-import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.transition.Slide;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Address;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.Gravity;
@@ -20,11 +19,18 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.example.miniuber.users.Complaint;
+import com.example.miniuber.users.TripCreation;
 import com.example.miniuber.users.trip.TripFacade;
+import com.example.miniuber.users.trip.TripProxy;
+import com.example.miniuber.users.trip.complaint.ComplaintFacade;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.navigation.NavigationView;
 
-public class BookCarActivity extends AppCompatActivity {
+import java.time.LocalDate;
+import java.util.Date;
+
+public class BookCar extends AppCompatActivity {
 
     private SearchView pickPoint,destination;
     private MaterialButton pickTimeBtn,ConfirmBtn;
@@ -51,9 +57,9 @@ public class BookCarActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(String query) {
 
-                 pickPointAd = tripFacade.getCoordinates(query, BookCarActivity.this);
+                 pickPointAd = tripFacade.getCoordinates(query, BookCar.this);
 
-                    Toast.makeText(BookCarActivity.this, " address "+pickPointAd.getAddressLine(0), Toast.LENGTH_LONG).show();
+                    Toast.makeText(BookCar.this, " address "+pickPointAd.getAddressLine(0), Toast.LENGTH_LONG).show();
 
 
 
@@ -68,8 +74,8 @@ public class BookCarActivity extends AppCompatActivity {
         destination.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                 destinationAd= tripFacade.getCoordinates(query,BookCarActivity.this);
-                Toast.makeText(BookCarActivity.this, "address: "+destinationAd.getAddressLine(0), Toast.LENGTH_LONG).show();
+                 destinationAd= tripFacade.getCoordinates(query, BookCar.this);
+                Toast.makeText(BookCar.this, "address: "+destinationAd.getAddressLine(0), Toast.LENGTH_LONG).show();
                 return false;
             }
 
@@ -82,13 +88,14 @@ public class BookCarActivity extends AppCompatActivity {
         pickTimeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               tripFacade.CalcTripTime(BookCarActivity.this);
+               tripFacade.CalcTripTime(BookCar.this);
             }
         });
         ConfirmBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                tripFacade.CreateTrip(pickPointAd,destinationAd);
+                TripCreation tripCreation=new TripProxy();
+                tripCreation.CreateTrip(pickPointAd,destinationAd, BookCar.this);
             }
         });
 
@@ -109,17 +116,20 @@ public class BookCarActivity extends AppCompatActivity {
 
                     drawerLayout.closeDrawer(Gravity.LEFT);
 
-                    AlertDialog.Builder builder= new AlertDialog.Builder(BookCarActivity.this);
+                    AlertDialog.Builder builder= new AlertDialog.Builder(BookCar.this);
                     builder.setTitle("Complaint Title");
 
-                    final EditText input = new EditText(BookCarActivity.this);
+                    final EditText input = new EditText(BookCar.this);
                     input.setInputType(InputType.TYPE_CLASS_TEXT);
 
                     builder.setView(input);
                     builder.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            Toast.makeText(BookCarActivity.this, input.getText().toString(), Toast.LENGTH_SHORT).show();
+                            //TODO -create Complaint
+                            ComplaintFacade complaintFacade=new ComplaintFacade();
+                            complaintFacade.createComplaint(input.getText().toString());
+                            Toast.makeText(BookCar.this, input.getText().toString(), Toast.LENGTH_SHORT).show();
                         }
                     });
                     builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -136,11 +146,11 @@ public class BookCarActivity extends AppCompatActivity {
                         //TODO log out the user
                 }
                  if (item.getItemId()==R.id.updateInfoItem) {
-                     Intent intent=new Intent(BookCarActivity.this, ViewAndUpdateDetails.class);
+                     Intent intent=new Intent(BookCar.this, ViewAndUpdateDetails.class);
                      startActivity(intent);
                 }
                 if (item.getItemId()==R.id.PreviousTripItem) {
-                    Intent intent=new Intent(BookCarActivity.this, ViewPreviousTrips.class);
+                    Intent intent=new Intent(BookCar.this, ViewPreviousTrips.class);
                     startActivity(intent);
                 }
 

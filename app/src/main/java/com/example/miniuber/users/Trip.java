@@ -1,10 +1,11 @@
 package com.example.miniuber.users;
 
+import android.content.Context;
 import android.location.Address;
 
 import com.example.miniuber.users.trip.CalcTripDistance;
 
-public class Trip {
+public class Trip  implements TripCreation{
     boolean hasADriver;
     private String customer;
     private Driver driver;
@@ -27,6 +28,20 @@ public class Trip {
         //then add discount price to the trip
         //then calculate the cumulative Fare
         return distance.calcPrice();
+    }
+    @Override
+    public void CreateTrip(Address pickPoint, Address destination, Context context)
+    {
+        Trip trip=new Trip();
+        trip.setCustomer("1");
+        trip.setTripTime(tripTime);
+        trip.setPickPoint(pickPoint.getAddressLine(0));
+        trip.setDestination(destination.getAddressLine(0));
+        trip.calcFare(pickPoint,destination);
+        trip.setHasADriver(false);
+
+
+
     }
 
     public int getRate() {
