@@ -1,8 +1,15 @@
-package com.example.miniuber.users;
+package com.example.miniuber.users.driver;
+
+import com.example.miniuber.users.trip.Trip;
+import com.example.miniuber.users.trip.TripDetails;
+import com.example.miniuber.users.User;
 
 import java.util.List;
 
-public class Driver extends User implements TripDetails{
+public class Driver extends User implements TripDetails {
+
+
+    private boolean OwnACar;
     private boolean hasACar;
     private Car car;
     private String mobilePhone;
@@ -32,7 +39,13 @@ public class Driver extends User implements TripDetails{
     public void setCar(Car car) {
         this.car = car;
     }
+    public boolean isOwnACar() {
+        return OwnACar;
+    }
 
+    public void setOwnACar(boolean ownACar) {
+        OwnACar = ownACar;
+    }
     public String getMobilePhone() {
         return mobilePhone;
     }

@@ -1,4 +1,4 @@
-package com.example.miniuber.users;
+package com.example.miniuber.users.trip.complaint;
 
 public class Complaint {
     private String userId;

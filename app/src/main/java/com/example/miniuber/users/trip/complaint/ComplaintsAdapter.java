@@ -10,9 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.miniuber.R;
-import com.example.miniuber.users.Complaint;
-import com.example.miniuber.users.Trip;
-import com.example.miniuber.users.trip.PreviousTripsAdapter;
 
 import java.util.ArrayList;
 
@@ -38,7 +35,7 @@ public class ComplaintsAdapter extends RecyclerView.Adapter<ComplaintsAdapter.Vi
     public void onBindViewHolder(@NonNull ComplaintsAdapter.ViewHolder holder, int position) {
             Complaint complaint=complaintArrayList.get(position);
             holder.ComplaintText.setText(complaint.getComplaintText());
-            holder.ComplaintDate.setText(complaint.getComplaintText());
+            holder.ComplaintDate.setText(complaint.getComplaintDate());
     }
 
     @Override

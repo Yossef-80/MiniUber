@@ -3,7 +3,6 @@ package com.example.miniuber.users.trip.Responsibilities;
 import android.content.Context;
 import android.widget.Toast;
 
-import com.example.miniuber.users.Driver;
 import com.example.miniuber.users.User;
 
 public class DatabaseRegisterHandler extends Handler{

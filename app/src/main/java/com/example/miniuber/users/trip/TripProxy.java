@@ -4,9 +4,6 @@ import android.content.Context;
 import android.location.Address;
 import android.widget.Toast;
 
-import com.example.miniuber.users.Trip;
-import com.example.miniuber.users.TripCreation;
-
 public class TripProxy implements TripCreation {
     private static  int NumberOfRequests;
     private Trip trip;

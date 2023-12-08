@@ -7,10 +7,6 @@ import android.location.Geocoder;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.example.miniuber.users.Trip;
-import com.example.miniuber.users.TripCreation;
-import com.google.android.gms.maps.model.LatLng;
-
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.List;

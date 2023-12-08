@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.miniuber.R;
-import com.example.miniuber.users.Trip;
 import com.google.android.material.button.MaterialButton;
 
 import java.util.ArrayList;
@@ -19,11 +18,12 @@ import java.util.ArrayList;
 public class PreviousTripsAdapter extends RecyclerView.Adapter<PreviousTripsAdapter.ViewHolder> {
 Context context;
 ArrayList<Trip> tripArrayList;
+int CustomerOrDriver;
 
-
-    public PreviousTripsAdapter(Context context,ArrayList<Trip> tripArrayList) {
+    public PreviousTripsAdapter(Context context,ArrayList<Trip> tripArrayList,int CustomerOrDriver) {
     this.context=context;
     this.tripArrayList=tripArrayList;
+    this.CustomerOrDriver=CustomerOrDriver;
     }
 
     @NonNull
@@ -40,13 +40,21 @@ ArrayList<Trip> tripArrayList;
         holder.destination.setText(trip.getDestination());
         holder.tripTime.setText(trip.getTripTime());
         holder.pickPoint.setText(trip.getPickPoint());
-        holder.RateDriverBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                holder.ratingBar.getRating();
-                //TODO -store in the database rating in trip and update driver rate
-            }
-        });
+        if(CustomerOrDriver==1){     //customer
+            holder.RateDriverBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    holder.ratingBar.getRating();
+                    //TODO -store in the database rating in trip and update driver rate
+                }
+            });
+
+        }
+        else if(CustomerOrDriver==2) {//driver
+            holder.RateDriverBtn.setText("Accept Trip");
+            holder.ratingBar.setVisibility(View.GONE);
+        }
+
     }
 
     @Override

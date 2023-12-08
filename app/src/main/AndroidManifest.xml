@@ -13,6 +13,21 @@
         android:theme="@style/Theme.MiniUber"
         tools:targetApi="31">
         <activity
+            android:name=".SearchAvailableTrips"
+            android:exported="false" />
+        <activity
+            android:name=".ChangeCar"
+            android:exported="false" />
+        <activity
+            android:name=".ChangeDriverCar"
+            android:exported="false" />
+        <activity
+            android:name=".AvailableCarsToAssign"
+            android:exported="false" />
+        <activity
+            android:name=".DriverNotHaveCar"
+            android:exported="false" />
+        <activity
             android:name=".ShowComplaints"
             android:exported="false" />
         <activity

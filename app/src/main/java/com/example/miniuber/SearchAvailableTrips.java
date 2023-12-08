@@ -6,28 +6,23 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
-import com.example.miniuber.users.trip.Trip;
 import com.example.miniuber.users.trip.PreviousTripsAdapter;
+import com.example.miniuber.users.trip.Trip;
 
 import java.util.ArrayList;
 
-public class ViewPreviousTrips extends AppCompatActivity {
-    RecyclerView previousTrips;
+public class SearchAvailableTrips extends AppCompatActivity {
+    RecyclerView AvailableTrips;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_previous_trips);
-        previousTrips=findViewById(R.id.recyclerView);
-        previousTrips.setLayoutManager(new LinearLayoutManager(ViewPreviousTrips.this));
-        previousTrips.setHasFixedSize(true);
-        PreviousTripsAdapter adapter=new PreviousTripsAdapter(ViewPreviousTrips.this,fillTrips(),1);
-        previousTrips.setAdapter(adapter);
-
-
-
-
+        setContentView(R.layout.activity_search_available_trips);
+        AvailableTrips=findViewById(R.id.SearchTripsRecycler);
+        AvailableTrips.setLayoutManager(new LinearLayoutManager(SearchAvailableTrips.this));
+        AvailableTrips.setHasFixedSize(true);
+        PreviousTripsAdapter adapter=new PreviousTripsAdapter(SearchAvailableTrips.this,fillTrips(),2);
+        AvailableTrips.setAdapter(adapter);
     }
-    //demo
     public ArrayList<Trip> fillTrips()
     {
         ArrayList<Trip> tripArrayList=new ArrayList<>();
@@ -37,7 +32,7 @@ public class ViewPreviousTrips extends AppCompatActivity {
             trip.setTripTime("Time"+String.valueOf(i));
             trip.setDestination("Dist: "+String.valueOf(i));
             trip.setPickPoint("Pick: "+String.valueOf(i));
-            trip.setCarFare(i*10);
+            trip.setCarFare(i);
             tripArrayList.add(trip);
         }
         return tripArrayList;

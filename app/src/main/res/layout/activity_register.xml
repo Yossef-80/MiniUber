@@ -129,7 +129,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Have a Car? "
-        android:visibility="gone"
+
+        android:visibility="visible"
         android:layout_margin="10dp"
         />
 
@@ -182,8 +183,9 @@
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="32dp"
         android:ems="10"
-        android:hint="Car Manufacturer"
+        android:hint="Car Year"
         android:inputType="number"
+
         app:boxStrokeColor="@color/black"
         app:hintTextColor="@color/black"
         android:visibility="gone"
@@ -191,6 +193,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/register_car_manufacturer_year"
+            android:inputType="number"
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

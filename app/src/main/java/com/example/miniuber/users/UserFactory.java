@@ -1,5 +1,9 @@
 package com.example.miniuber.users;
 
+import com.example.miniuber.users.customer.Customer;
+import com.example.miniuber.users.driver.Driver;
+import com.example.miniuber.users.employee.Employee;
+
 public class UserFactory {
     private User userObj;
 

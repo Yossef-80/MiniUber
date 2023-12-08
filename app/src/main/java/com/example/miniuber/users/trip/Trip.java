@@ -1,9 +1,9 @@
-package com.example.miniuber.users;
+package com.example.miniuber.users.trip;
 
 import android.content.Context;
 import android.location.Address;
 
-import com.example.miniuber.users.trip.CalcTripDistance;
+import com.example.miniuber.users.driver.Driver;
 
 public class Trip  implements TripCreation{
     boolean hasADriver;

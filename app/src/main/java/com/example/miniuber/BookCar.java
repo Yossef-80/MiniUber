@@ -9,7 +9,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Address;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.Gravity;
@@ -19,22 +18,18 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import com.example.miniuber.users.Complaint;
-import com.example.miniuber.users.TripCreation;
+import com.example.miniuber.users.trip.TripCreation;
 import com.example.miniuber.users.trip.TripFacade;
 import com.example.miniuber.users.trip.TripProxy;
 import com.example.miniuber.users.trip.complaint.ComplaintFacade;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.navigation.NavigationView;
 
-import java.time.LocalDate;
-import java.util.Date;
-
 public class BookCar extends AppCompatActivity {
 
     private SearchView pickPoint,destination;
     private MaterialButton pickTimeBtn,ConfirmBtn;
-    private ImageButton menuBtn;
+    private ImageButton menuBtn,backBtn;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     Address pickPointAd,destinationAd;
@@ -50,9 +45,19 @@ public class BookCar extends AppCompatActivity {
         ConfirmBtn=findViewById(R.id.confirmButton);
         drawerLayout=findViewById(R.id.drawerLayout);
         navigationView=findViewById(R.id.nav_view);
-
+        backBtn=findViewById(R.id.backBtn);
         menuBtn=findViewById(R.id.menuBtn);
         TripFacade tripFacade = new TripFacade();
+
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+
         pickPoint.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {

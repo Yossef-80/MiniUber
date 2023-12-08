@@ -1,4 +1,4 @@
-package com.example.miniuber.users;
+package com.example.miniuber.users.driver;
 
 public class Car {
     private String id;

@@ -1,8 +1,12 @@
-package com.example.miniuber.users;
+package com.example.miniuber.users.customer;
+
+import com.example.miniuber.users.trip.Trip;
+import com.example.miniuber.users.trip.TripDetails;
+import com.example.miniuber.users.User;
 
 import java.util.List;
 
-public class Customer extends User  implements TripDetails {
+public class Customer extends User implements TripDetails {
     private String mobilePhone;
 
     public String getMobilePhone() {

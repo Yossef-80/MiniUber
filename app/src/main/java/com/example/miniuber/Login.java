@@ -6,7 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 
-import com.example.miniuber.users.Customer;
+import com.example.miniuber.users.customer.Customer;
 import com.example.miniuber.users.User;
 import com.example.miniuber.users.UserFactory;
 import com.google.android.material.button.MaterialButton;

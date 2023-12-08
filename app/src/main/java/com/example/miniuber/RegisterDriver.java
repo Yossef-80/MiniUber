@@ -48,7 +48,7 @@ public class RegisterDriver extends AppCompatActivity {
         hasACar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(hasACar.isActivated())
+                if(hasACar.isChecked())
                 {
                  carModel.setVisibility(View.VISIBLE);
                  carManufacturer.setVisibility(View.VISIBLE);

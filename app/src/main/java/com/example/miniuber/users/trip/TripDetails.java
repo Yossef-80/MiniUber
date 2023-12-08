@@ -1,4 +1,4 @@
-package com.example.miniuber.users;
+package com.example.miniuber.users.trip;
 
 import java.util.List;
 

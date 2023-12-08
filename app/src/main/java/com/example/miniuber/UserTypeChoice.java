@@ -34,7 +34,7 @@ public class UserTypeChoice extends AppCompatActivity {
                 preferencesEditor.putString("UserType","employee");
                 preferencesEditor.apply();
 
-                Intent intent=new Intent(UserTypeChoice.this, BookCar.class);
+                Intent intent=new Intent(UserTypeChoice.this, EmployeeMainPage.class);
                 startActivity(intent);
 
             }
@@ -45,7 +45,7 @@ public class UserTypeChoice extends AppCompatActivity {
                 preferencesEditor.putString("UserType","Driver");
                 preferencesEditor.apply();
 
-                Intent intent=new Intent(UserTypeChoice.this, ViewPreviousTrips.class);
+                Intent intent=new Intent(UserTypeChoice.this, SearchAvailableTrips.class);
                 startActivity(intent);
             }
         });
@@ -54,7 +54,7 @@ public class UserTypeChoice extends AppCompatActivity {
             public void onClick(View view) {
                 preferencesEditor.putString("UserType","Customer");
                 preferencesEditor.apply();
-                Intent intent=new Intent(UserTypeChoice.this, Login.class);
+                Intent intent=new Intent(UserTypeChoice.this, BookCar.class);
                 startActivity(intent);
             }
         });
