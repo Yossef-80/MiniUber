@@ -1,15 +1,17 @@
 package com.example.miniuber.users.trip.complaint;
 
+import com.example.miniuber.users.User;
+
 public class Complaint {
-    private String userId;
+    private int userId;
     private String ComplaintText;
     private String ComplaintDate;
 
-    public String getUserId() {
+    public int getUser() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUser(int userId) {
         this.userId = userId;
     }
 

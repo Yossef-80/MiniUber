@@ -5,8 +5,15 @@ public class Car {
     private String model;
     private String manufacturer;
     private String year;
+    private boolean hasOwner;
 
+    public boolean isHasOwner() {
+        return hasOwner;
+    }
 
+    public void setHasOwner(boolean hasOwner) {
+        this.hasOwner = hasOwner;
+    }
 
     public String getId() {
         return id;

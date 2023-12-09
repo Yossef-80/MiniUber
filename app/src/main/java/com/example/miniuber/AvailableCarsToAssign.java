@@ -8,8 +8,6 @@ import android.os.Bundle;
 
 import com.example.miniuber.users.driver.Car;
 import com.example.miniuber.users.driver.CarAdapter;
-import com.example.miniuber.users.driver.Driver;
-import com.example.miniuber.users.driver.DriverNotHaveCarAdapter;
 
 import java.util.ArrayList;
 

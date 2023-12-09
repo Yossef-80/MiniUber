@@ -3,16 +3,27 @@ package com.example.miniuber.users.trip;
 import android.content.Context;
 import android.location.Address;
 
-import com.example.miniuber.users.driver.Driver;
+import java.sql.Driver;
 
 public class Trip  implements TripCreation{
+    private String id;
+
+
     boolean hasADriver;
     private String customer;
-    private Driver driver;
+    private String driver;
     private String pickPoint;
     private String destination;
     private int carFare;
     private String tripTime;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
 
     private int rate;
@@ -69,11 +80,11 @@ public class Trip  implements TripCreation{
         this.customer = customer;
     }
 
-    public Driver getDriver() {
+    public String getDriver() {
         return driver;
     }
 
-    public void setDriver(Driver driver) {
+    public void setDriver(String driver) {
         this.driver = driver;
     }
 

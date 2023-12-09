@@ -4,12 +4,12 @@ import com.example.miniuber.Register;
 
 public abstract class  User  {
 
-    private String id;
+    private int id;
     private String name;
     private String Email;
     private String password;
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
@@ -25,7 +25,7 @@ public abstract class  User  {
         return password;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

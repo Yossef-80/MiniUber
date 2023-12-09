@@ -1,12 +1,11 @@
 package com.example.miniuber.users.employee;
 
 import com.example.miniuber.users.driver.Car;
-import com.example.miniuber.users.driver.Driver;
 import com.example.miniuber.users.User;
 
 public class Employee extends User {
     @Override
-    public boolean Login(String userName, String password) {
+    public boolean Login(java.lang.String userName, java.lang.String password) {
         //TODO -admin login
         return false;
     }
@@ -16,7 +15,7 @@ public class Employee extends User {
         //TODO -admin  registers driver to the system
         return false;
     }
-    public Boolean assignCarToDriver(Car car, Driver driver)
+    public Boolean assignCarToDriver(Car car, String driver)
     {
         //TODO -Assign car to driver
         return false;
@@ -26,7 +25,7 @@ public class Employee extends User {
         //TODO -Assign car to driver
         return false;
     }
-    public Boolean ChangeDriverCar(Car newCar,Driver driver)
+    public Boolean ChangeDriverCar(Car newCar, String driver)
     {
         //TODO -Assign car to driver
         return false;
