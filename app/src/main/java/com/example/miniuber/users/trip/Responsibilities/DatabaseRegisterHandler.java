@@ -8,15 +8,15 @@ import com.example.miniuber.users.User;
 public class DatabaseRegisterHandler extends Handler{
     Context context;
     User user;
-    public DatabaseRegisterHandler(User driver, Context context) {
-        user=driver;
+    public DatabaseRegisterHandler(User user, Context context) {
+        this.user=user;
         this.context=context;
     }
 
     @Override
     public boolean handle() {
         //TODO -query to insert record in database
-        if(!user.Register())
+        if(!user.Register(context))
         {
             Toast.makeText(context, "There is error in database", Toast.LENGTH_LONG).show();
             return false;

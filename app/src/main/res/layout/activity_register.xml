@@ -111,14 +111,13 @@
         android:layout_marginTop="32dp"
         android:ems="10"
         android:hint="Mobile phone"
-        android:inputType="number"
         app:boxStrokeColor="@color/black"
-        app:passwordToggleEnabled="true"
         app:hintTextColor="@color/black"
         >
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/register_phone_field"
+            android:inputType="number"
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

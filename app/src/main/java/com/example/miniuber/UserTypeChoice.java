@@ -11,19 +11,17 @@ import com.example.miniuber.users.UserFactory;
 import com.google.android.material.card.MaterialCardView;
 
 public class UserTypeChoice extends AppCompatActivity {
-    public static String sharedPrefFile ="com.example.android.MiniUber";
+    //SharedPreferences mPreferences = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_choice);
-          SharedPreferences mPreferences = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
         //
         MaterialCardView EmpCardView=findViewById(R.id.adminCard);
         MaterialCardView DriverCardView=findViewById(R.id.DriverCard);
         MaterialCardView CustomerCardView=findViewById(R.id.CustomerCard);
 
-        SharedPreferences.Editor preferencesEditor = mPreferences.edit();
 
 
 
@@ -31,10 +29,10 @@ public class UserTypeChoice extends AppCompatActivity {
         EmpCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                preferencesEditor.putString("UserType","employee");
-                preferencesEditor.apply();
 
-                Intent intent=new Intent(UserTypeChoice.this, EmployeeMainPage.class);
+
+                Intent intent=new Intent(UserTypeChoice.this, Login.class);
+                intent.putExtra("userType","employee");
                 startActivity(intent);
 
             }
@@ -42,19 +40,23 @@ public class UserTypeChoice extends AppCompatActivity {
         DriverCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                preferencesEditor.putString("UserType","Driver");
-                preferencesEditor.apply();
+               /* preferencesEditor.putString("UserType","Driver");
+                preferencesEditor.apply();*/
 
-                Intent intent=new Intent(UserTypeChoice.this, SearchAvailableTrips.class);
+                Intent intent=new Intent(UserTypeChoice.this, Login.class);
+                intent.putExtra("userType","driver");
+
                 startActivity(intent);
             }
         });
         CustomerCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                preferencesEditor.putString("UserType","Customer");
-                preferencesEditor.apply();
-                Intent intent=new Intent(UserTypeChoice.this, BookCar.class);
+               /* preferencesEditor.putString("UserType","Customer");
+                preferencesEditor.apply();*/
+                Intent intent=new Intent(UserTypeChoice.this, Login.class);
+                intent.putExtra("userType","customer");
+
                 startActivity(intent);
             }
         });

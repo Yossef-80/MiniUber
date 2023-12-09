@@ -1,13 +1,15 @@
 package com.example.miniuber.users;
 
+import android.content.Context;
+
 import com.example.miniuber.Register;
 
 public abstract class  User  {
 
-    private int id;
-    private String name;
-    private String Email;
-    private String password;
+    protected int id;
+    protected String name;
+    protected String Email;
+    protected String password;
 
     public int getId() {
         return id;
@@ -41,8 +43,8 @@ public abstract class  User  {
         this.password = password;
     }
 
-    public  abstract boolean Login(String userName, String password);
-    public abstract boolean Register();
-
+    public  abstract boolean Login(String userName, String password, Context context);
+    public abstract boolean Register(Context context);
+    public abstract void saveUserData(Context context);
 
 }

@@ -16,9 +16,9 @@ import java.util.ArrayList;
 
 public class DriverNotHaveCarAdapter extends RecyclerView.Adapter<DriverNotHaveCarAdapter.ViewHolder> {
     Context context;
-    ArrayList<String> driverArrayList;
+    ArrayList<Driver> driverArrayList;
 
-    public DriverNotHaveCarAdapter(Context context, ArrayList<String> driverArrayList) {
+    public DriverNotHaveCarAdapter(Context context, ArrayList<Driver> driverArrayList) {
         this.context = context;
         this.driverArrayList = driverArrayList;
 
@@ -36,7 +36,7 @@ public class DriverNotHaveCarAdapter extends RecyclerView.Adapter<DriverNotHaveC
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        String driver=driverArrayList.get(position);
+        Driver driver=driverArrayList.get(position);
         holder.DriverPhone.setText(driver.getMobilePhone());
         holder.DriverName.setText(driver.getName());
         holder.DriverEmail.setText(driver.getEmail());

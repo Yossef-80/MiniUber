@@ -1,10 +1,14 @@
 package com.example.miniuber.database;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 import com.example.miniuber.users.trip.Trip;
 import com.example.miniuber.users.trip.complaint.Complaint;
@@ -12,12 +16,17 @@ import com.example.miniuber.users.trip.complaint.Complaint;
 import java.util.ArrayList;
 
 public class UberDBHelper extends SQLiteOpenHelper {
+    public static String sharedPrefFile ="com.example.android.MiniUber";
 
+    Context context;
     private static String databaseName="MiniUberDB";
     SQLiteDatabase uberDatabase;
 
+
     public UberDBHelper(Context context) {
         super(context, databaseName, null, 1);
+        this.context=context;
+
     }
 
     @Override
@@ -51,6 +60,7 @@ public class UberDBHelper extends SQLiteOpenHelper {
     }
     public  boolean LoginCustomer(String email,String password)
     {
+
         SQLiteDatabase db=this.getReadableDatabase();
 
             String query="select * from customer where email= \""+email+"\" and password=\""+password+"\"";
@@ -59,14 +69,14 @@ public class UberDBHelper extends SQLiteOpenHelper {
         {
            cursor= db.rawQuery(query,null);
         }
-        db.close();
 
-        return cursor != null;
+        return cursor.getCount()>0;
 
 
     }
     public  boolean LoginEmployee(String email,String password)
     {
+
         SQLiteDatabase db=this.getReadableDatabase();
 
         String query="select * from employee where email= \""+email+"\" and password=\""+password+"\"";
@@ -75,9 +85,9 @@ public class UberDBHelper extends SQLiteOpenHelper {
         {
             cursor= db.rawQuery(query,null);
         }
-        db.close();
 
-        return cursor != null;
+
+        return  cursor.getCount()>0;
 
     }
     public  boolean LoginDriver(String email,String password)
@@ -92,7 +102,7 @@ public class UberDBHelper extends SQLiteOpenHelper {
         }
         db.close();
 
-        return cursor != null;
+        return cursor.getCount()>0;
 
     }
     public boolean RegisterCustomer(String name,String mobilePhone,String email,String password)

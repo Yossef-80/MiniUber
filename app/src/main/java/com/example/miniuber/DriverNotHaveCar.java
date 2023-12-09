@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
+import com.example.miniuber.users.driver.Driver;
 import com.example.miniuber.users.driver.DriverNotHaveCarAdapter;
 
 import java.util.ArrayList;
@@ -24,11 +25,11 @@ public class DriverNotHaveCar extends AppCompatActivity {
         Drivers.setAdapter(adapter);
     }
 
-    private ArrayList<String> fillDrivers() {
-        ArrayList<String> DriverArrayList=new ArrayList<>();
+    private ArrayList<Driver> fillDrivers() {
+        ArrayList<Driver> DriverArrayList=new ArrayList<>();
 
         for (int i=0 ;i<10;i++)
-        { String driver=new String();
+        { Driver driver=new Driver();
             driver.setName("Youssef");
             driver.setMobilePhone("0123456789"+ java.lang.String.valueOf(i));
             driver.setEmail("youssef@mail.com");

@@ -3,11 +3,13 @@ package com.example.miniuber;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
+import com.example.miniuber.users.driver.Driver;
 import android.os.Bundle;
 import android.widget.TextView;
 
 import com.example.miniuber.users.driver.DriverNotHaveCarAdapter;
+
+
 
 import java.util.ArrayList;
 
@@ -29,11 +31,11 @@ public class ChangeDriverCar extends AppCompatActivity {
 
 
     }
-    private ArrayList<String> fillDrivers() {
-        ArrayList<String> DriverArrayList=new ArrayList<>();
+    private ArrayList<Driver> fillDrivers() {
+        ArrayList<Driver> DriverArrayList=new ArrayList<>();
 
         for (int i=0 ;i<10;i++)
-        { String driver=new String();
+        { Driver driver=new Driver();
             driver.setName("Youssef");
             driver.setMobilePhone("0987654321"+ java.lang.String.valueOf(i));
             driver.setEmail("youssef_haveCar@mail.com");
