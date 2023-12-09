@@ -19,11 +19,13 @@ public class PreviousTripsAdapter extends RecyclerView.Adapter<PreviousTripsAdap
 Context context;
 ArrayList<Trip> tripArrayList;
 int CustomerOrDriver;
+boolean viewBtn;
 
-    public PreviousTripsAdapter(Context context,ArrayList<Trip> tripArrayList,int CustomerOrDriver) {
+    public PreviousTripsAdapter(Context context,ArrayList<Trip> tripArrayList,int CustomerOrDriver,boolean viewBtn) {
     this.context=context;
     this.tripArrayList=tripArrayList;
     this.CustomerOrDriver=CustomerOrDriver;
+    this.viewBtn=viewBtn;
     }
 
     @NonNull
@@ -51,7 +53,12 @@ int CustomerOrDriver;
 
         }
         else if(CustomerOrDriver==2) {//driver
+            if (!viewBtn)
+            {
+                holder.RateDriverBtn.setVisibility(View.GONE);
+            }
             holder.RateDriverBtn.setText("Accept Trip");
+
             holder.ratingBar.setVisibility(View.GONE);
         }
 
