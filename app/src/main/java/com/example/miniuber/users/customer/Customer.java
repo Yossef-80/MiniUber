@@ -61,6 +61,13 @@ public class Customer extends User implements TripDetails {
 
         SharedPreferences.Editor preferencesEditor = mPreferences.edit();
         preferencesEditor.putString("UserType","customer");
+        preferencesEditor.putBoolean("isLogged",true);
+
+        UberDBHelper dbHelper = new UberDBHelper(context);
+        int id=dbHelper.getCustomerid(Email);
+        this.id=id;
+        preferencesEditor.putInt("id",id);
+
         preferencesEditor.apply();
     }
 

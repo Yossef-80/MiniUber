@@ -41,7 +41,7 @@ public class RegisterDriver extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Handler handler=new EmailHandler(email);
-                    handler.setNextHandler(new EmailExistanceHandler(email)).setNextHandler(new PasswordHandler(password)).setNextHandler(new ConfirmPassword(password,confirmPassword));
+                    handler.setNextHandler(new EmailExistanceHandler(email,RegisterDriver.this)).setNextHandler(new PasswordHandler(password)).setNextHandler(new ConfirmPassword(password,confirmPassword));
                 handler.handle();
             }
         });

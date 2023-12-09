@@ -29,9 +29,12 @@ public class DatabaseLoginHandler extends Handler{
             Toast.makeText(context, "the user name of password may be wrong", Toast.LENGTH_LONG).show();
             return false;
         }
+        user.setEmail(username);
+        user.setPassword(password);
+        user.saveUserData(context);
         Toast.makeText(context, "the login succeeded", Toast.LENGTH_LONG).show();
 
 
-        return handleNext();
+        return true;
     }
 }

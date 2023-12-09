@@ -31,7 +31,15 @@ public class Employee extends User {
 
         SharedPreferences.Editor preferencesEditor = mPreferences.edit();
         preferencesEditor.putString("UserType","employee");
+        preferencesEditor.putBoolean("isLogged",true);
+
+        UberDBHelper dbHelper = new UberDBHelper(context);
+        int id=dbHelper.getEmployeeId(Email);
+        this.id=id;
+        preferencesEditor.putInt("id",id);
+
         preferencesEditor.apply();
+
     }
 
     public Boolean assignCarToDriver(Car car, String driver)

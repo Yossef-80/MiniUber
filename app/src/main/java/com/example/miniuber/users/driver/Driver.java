@@ -85,6 +85,14 @@ public class Driver extends User implements TripDetails {
 
         SharedPreferences.Editor preferencesEditor = mPreferences.edit();
         preferencesEditor.putString("UserType","driver");
+        preferencesEditor.putBoolean("isLogged",true);
+
+        UberDBHelper dbHelper = new UberDBHelper(context);
+        int id=dbHelper.getDriverId(Email);
+        this.id=id;
+
+        preferencesEditor.putInt("id",id);
+
         preferencesEditor.apply();
     }
 

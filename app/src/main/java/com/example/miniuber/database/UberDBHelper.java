@@ -58,6 +58,48 @@ public class UberDBHelper extends SQLiteOpenHelper {
 
         onCreate(db);
     }
+    public int getCustomerid(String email)
+    {
+        SQLiteDatabase db=this.getReadableDatabase();
+
+        String query="select id from customer where email= \""+email+"\"";
+        Cursor cursor=null;
+        if(db!=null)
+        {
+            cursor= db.rawQuery(query,null);
+        }
+        if (cursor != null)
+            cursor.moveToFirst();
+        assert cursor != null;
+        return cursor.getInt(0);
+    }
+    public int getDriverId(String email)
+    {
+        SQLiteDatabase db=this.getReadableDatabase();
+
+        String query="select id from driver where email= \""+email+"\"";
+        Cursor cursor=null;
+        if(db!=null)
+        {
+            cursor= db.rawQuery(query,null);
+        }
+            cursor.moveToFirst();
+        return cursor.getInt(0);
+    }
+    public int getEmployeeId(String email)
+    {
+        SQLiteDatabase db=this.getReadableDatabase();
+
+        String query="select id from employee where email= \""+email+"\"";
+        Cursor cursor=null;
+        if(db!=null)
+        {
+            cursor= db.rawQuery(query,null);
+        }
+        if (cursor != null)
+            cursor.moveToFirst();
+        return cursor.getInt(0);
+    }
     public  boolean LoginCustomer(String email,String password)
     {
 
@@ -471,6 +513,28 @@ public class UberDBHelper extends SQLiteOpenHelper {
         long results2=db.update("car",cv2,"id=?",new String[]{String.valueOf(old_car_id)});
         return results != -1 && results2 != -1;
 
+    }
+    public boolean isTheEmailMade(String email)
+    {
+
+        SQLiteDatabase db=this.getReadableDatabase();
+        String query="select * from driver where email= \""+email+"\"";
+        Cursor cursor=null;
+        cursor=db.rawQuery(query,null);
+        boolean foundInDriver=cursor.getCount()>0;
+
+         query="select * from customer where email= \""+email+"\"";
+
+        cursor=null;
+        cursor=db.rawQuery(query,null);
+        boolean foundInCustomer=cursor.getCount()>0;
+
+        query="select * from employee where email=\""+email+"\"";
+
+        cursor=null;
+        cursor=db.rawQuery(query,null);
+        boolean foundInEmployee=cursor.getCount()>0;
+        return foundInCustomer||foundInDriver||foundInEmployee;
     }
 
 
