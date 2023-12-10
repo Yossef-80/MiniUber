@@ -10,17 +10,14 @@ public class TripProxy implements TripCreation {
 
 
     @Override
-    public void CreateTrip(Address pickPoint, Address destination, Context context) {
+    public void CreateTrip(Address pickPoint,Address destination,String tripDate, Context context) {
             if(NumberOfRequests>1)
             {
                 Toast.makeText(context, "there is 1 Trip Already booked", Toast.LENGTH_LONG).show();
             }
             else {
-                if (trip==null)
-                {
-                    trip=new Trip();
-                }
-                trip.CreateTrip(pickPoint,destination,context);
+
+                trip.CreateTrip(pickPoint,destination,tripDate,context);
                 NumberOfRequests++;
             }
     }

@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.example.miniuber.users.trip.Trip;
 import com.example.miniuber.users.trip.TripCreation;
 import com.example.miniuber.users.trip.TripFacade;
 import com.example.miniuber.users.trip.TripProxy;
@@ -32,7 +33,8 @@ public class BookCar extends AppCompatActivity {
     private ImageButton menuBtn,backBtn;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
-    Address pickPointAd,destinationAd;
+    Address pickPointAd=null,destinationAd=null;
+    String tripTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,8 +63,8 @@ public class BookCar extends AppCompatActivity {
         pickPoint.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                    pickPointAd=tripFacade.getCoordinates(query, BookCar.this);
 
-                 pickPointAd = tripFacade.getCoordinates(query, BookCar.this);
 
                     Toast.makeText(BookCar.this, " address "+pickPointAd.getAddressLine(0), Toast.LENGTH_LONG).show();
 
@@ -79,7 +81,7 @@ public class BookCar extends AppCompatActivity {
         destination.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                 destinationAd= tripFacade.getCoordinates(query, BookCar.this);
+                destinationAd= tripFacade.getCoordinates(query, BookCar.this);
                 Toast.makeText(BookCar.this, "address: "+destinationAd.getAddressLine(0), Toast.LENGTH_LONG).show();
                 return false;
             }
@@ -93,14 +95,24 @@ public class BookCar extends AppCompatActivity {
         pickTimeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               tripFacade.CalcTripTime(BookCar.this);
+                tripTime=tripFacade.CalcTripTime(BookCar.this);
+               // Toast.makeText(BookCar.this, "Time set to "+tripTime, Toast.LENGTH_SHORT).show();
             }
         });
         ConfirmBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 TripCreation tripCreation=new TripProxy();
-                tripCreation.CreateTrip(pickPointAd,destinationAd, BookCar.this);
+                Toast.makeText(BookCar.this, "Time set to "+tripTime, Toast.LENGTH_LONG).show();
+
+                if (pickPointAd!=null&&destinationAd!=null&&tripTime!=null)
+                {
+                    tripCreation.CreateTrip(pickPointAd,destinationAd,tripTime ,BookCar.this);
+
+                }
+                else{
+                    //Toast.makeText(BookCar.this, "Empty Fields", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

@@ -4,5 +4,5 @@ import android.content.Context;
 import android.location.Address;
 
 public interface TripCreation {
-    public void CreateTrip(Address pickPoint, Address destination, Context context);
+    public void CreateTrip(Address pickPoint,Address destination,String tripDate, Context context);
 }

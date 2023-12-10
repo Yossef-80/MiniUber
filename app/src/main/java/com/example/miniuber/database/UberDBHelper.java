@@ -274,7 +274,7 @@ public class UberDBHelper extends SQLiteOpenHelper {
         while (cursor.moveToNext())
         {
             Trip trip=new Trip();
-            trip.setCustomer(cursor.getString(1));//customerID
+            trip.setCustomer(cursor.getInt(1));//customerID
             trip.setDriver(cursor.getString(2));//DriverID
             trip.setRate(Integer.parseInt(cursor.getString(3)));
             trip.setPickPoint(cursor.getString(4));
@@ -300,7 +300,7 @@ public class UberDBHelper extends SQLiteOpenHelper {
         while (cursor.moveToNext())
         {
             Trip trip=new Trip();
-            trip.setCustomer(cursor.getString(1));//customerID
+            trip.setCustomer(cursor.getInt(1));//customerID
             trip.setDriver(cursor.getString(2));//DriverID
             trip.setRate(Integer.parseInt(cursor.getString(3)));
             trip.setPickPoint(cursor.getString(4));
@@ -368,7 +368,7 @@ public class UberDBHelper extends SQLiteOpenHelper {
         while (cursor.moveToNext())
         {
             Trip trip=new Trip();
-            trip.setCustomer(cursor.getString(1));//customerID
+            trip.setCustomer(cursor.getInt(1));//customerID
             trip.setDriver(cursor.getString(2));//DriverID
             trip.setRate(Integer.parseInt(cursor.getString(3)));
             trip.setPickPoint(cursor.getString(4));

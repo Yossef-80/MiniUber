@@ -1,11 +1,15 @@
 package com.example.miniuber.users.trip;
 
+import android.app.Application;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.location.Address;
 import android.location.Geocoder;
 import android.widget.TimePicker;
 import android.widget.Toast;
+
+import com.example.miniuber.BookCar;
 
 import java.io.IOException;
 import java.util.Calendar;
@@ -32,24 +36,39 @@ public class TripFacade   {
             }
             return address;
         }
-        public void CalcTripTime(Context context) {
+        public String CalcTripTime(Context context) {
             final Calendar c=Calendar.getInstance();
             int hour=c.get(Calendar.HOUR_OF_DAY);
             int minute=c.get(Calendar.MINUTE);
             TimeConverter timeConverter=new TimeConverter();
-            TimePickerDialog timePickerDialog=new TimePickerDialog(context, new TimePickerDialog.OnTimeSetListener() {
+            TimePickerDialog.OnTimeSetListener myTimeSetListener=new TimePickerDialog.OnTimeSetListener() {
                 @Override
-                public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                    String time=timeConverter.ConvertTo12h(hourOfDay,minute);
+                public void onTimeSet(TimePicker view, int hourOfDay, int minute1) {
 
-                    Toast.makeText(context, "Time set Successfully", Toast.LENGTH_SHORT).show();
-                        tripTime=time;
-                    // Toast.makeText(context, hourOfDay+" "+minute, Toast.LENGTH_SHORT).show();
+                      //  tripTime=timeConverter.ConvertTo12h(hourOfDay, minute1);
+
+                    tripTime=timeConverter.ConvertTo12h(hour,minute);
+
+
                 }
-            },hour,minute,false);
+            };
 
+
+            TimePickerDialog timePickerDialog = new TimePickerDialog(context, myTimeSetListener, hour, minute, false);
+            timePickerDialog.setTitle("Choose hour:");
+         /*  TimePickerDialog timePickerDialog=new TimePickerDialog(context, (view, hourOfDay, minute1) -> {
+               if(view.isShown())
+               {
+
+               }
+
+               // Toast.makeText(context, "Time set Successfully", Toast.LENGTH_SHORT).show();
+                                 // Toast.makeText(context, hourOfDay+" "+minute, Toast.LENGTH_SHORT).show();
+            },hour,minute,false);*/
+            timePickerDialog.setButton(DialogInterface.BUTTON_POSITIVE,"CONFIRM",timePickerDialog);
             timePickerDialog.show();
 
+            return tripTime;
         }
 
 }

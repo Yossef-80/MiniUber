@@ -21,9 +21,9 @@ public class CalcTripDistance {
          distance=startPoint.distanceTo(endPoint);
         return distance;
     }
-    public double calcPrice()
+    public int calcPrice()
     {
-        return distance*3;
+        return (int)distance*3;
 
     }
 }

@@ -1,33 +1,42 @@
 package com.example.miniuber.users.trip;
 
+import static android.content.Context.MODE_PRIVATE;
+
+import static com.example.miniuber.database.UberDBHelper.sharedPrefFile;
+
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.location.Address;
+import android.preference.PreferenceManager;
+import android.widget.Toast;
+
+import com.example.miniuber.database.UberDBHelper;
 
 import java.sql.Driver;
 
 public class Trip  implements TripCreation{
-    private String id;
+    private int id;
 
 
     boolean hasADriver;
-    private String customer;
+    private int customer;
     private String driver;
     private String pickPoint;
     private String destination;
     private int carFare;
     private String tripTime;
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
 
     private int rate;
-    public double calcFare(Address pickpoint,Address destination)
+    public int calcFare(Address pickpoint,Address destination)
     {
         //TODO -calc fare
         CalcTripDistance distance= new CalcTripDistance();
@@ -38,21 +47,36 @@ public class Trip  implements TripCreation{
         //then add fare price depend on model of the car
         //then add discount price to the trip
         //then calculate the cumulative Fare
-        return distance.calcPrice();
+
+        setCarFare(distance.calcPrice());
+        return getCarFare();
     }
     @Override
-    public void CreateTrip(Address pickPoint, Address destination, Context context)
+    public void CreateTrip(Address pickPoint,Address destination,String tripDate, Context context)
     {
-        Trip trip=new Trip();
-        trip.setCustomer("1");
-        trip.setTripTime(tripTime);
-        trip.setPickPoint(pickPoint.getAddressLine(0));
-        trip.setDestination(destination.getAddressLine(0));
-        trip.calcFare(pickPoint,destination);
-        trip.setHasADriver(false);
 
 
 
+        setHasADriver(false);
+        setPickPoint(pickPoint.getAddressLine(0));
+        setDestination(destination.getAddressLine(0));
+        setTripTime(tripDate);
+
+
+        SharedPreferences sharedPreferences=context.getSharedPreferences(sharedPrefFile,MODE_PRIVATE);
+        int customerID = sharedPreferences.getInt("id",0);
+        setCustomer(customerID);
+
+
+
+        calcFare(pickPoint,destination);
+
+        UberDBHelper dbHelper = new UberDBHelper(context);
+        if(! dbHelper.CreateTrip(getPickPoint(),getDestination(),getTripTime(),getCustomer(),getTripTime(),getCarFare())) {
+
+            Toast.makeText(context, "There is error in trip creation", Toast.LENGTH_SHORT).show();
+        }
+        
     }
 
     public int getRate() {
@@ -72,11 +96,11 @@ public class Trip  implements TripCreation{
         this.hasADriver = hasADriver;
     }
 
-    public String getCustomer() {
+    public int getCustomer() {
         return customer;
     }
 
-    public void setCustomer(String customer) {
+    public void setCustomer(int customer) {
         this.customer = customer;
     }
 
