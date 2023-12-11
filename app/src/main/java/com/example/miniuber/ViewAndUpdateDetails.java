@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
+import com.example.miniuber.users.customer.Customer;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -29,12 +31,14 @@ public class ViewAndUpdateDetails extends AppCompatActivity {
         EditBtn=findViewById(R.id.editInfoBtn);
         ChangePasswordBtn=findViewById(R.id.ChangePasswordBtn);
         ConfirmPasswordBox=findViewById(R.id.passwordConfirmLayout);
+        Customer customer=new Customer();
+        customer.getData(ViewAndUpdateDetails.this);
         //DataBase
-        Name.setText("");
-        Email.setText("");
-        Password.setText("");
-        Phone.setText("");
-
+        Name.setText(customer.getName());
+        Email.setText(customer.getEmail());
+        Password.setText(customer.getPassword());
+        Phone.setText(customer.getMobilePhone());
+      //  Toast.makeText(this, "Email"+customer.getEmail()+" Name "+customer.getName(), Toast.LENGTH_SHORT).show();
         SaveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

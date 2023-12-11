@@ -5,6 +5,8 @@ import static com.example.miniuber.database.UberDBHelper.sharedPrefFile;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.widget.Toast;
 
 import com.example.miniuber.database.UberDBHelper;
 import com.example.miniuber.users.trip.Trip;
@@ -34,13 +36,34 @@ public class Customer extends User implements TripDetails {
         return  isRight;
     }
 
-
-    public void bookCar()
+    public void getData(Context context)
     {
+        UberDBHelper dbHelper = new UberDBHelper(context);
+        SharedPreferences sharedPreferences=context.getSharedPreferences(sharedPrefFile,MODE_PRIVATE);
+        int customerID = sharedPreferences.getInt("id",0);
+       Cursor cursor= dbHelper.getCustomerData(customerID);
+        Toast.makeText(context, "email is >"+cursor.getString(3), Toast.LENGTH_SHORT).show();
+        setId(cursor.getInt(0));
+        setName(cursor.getString(1));
+       setMobilePhone(cursor.getString(2));
+        setEmail(cursor.getString(3));
+        setPassword(cursor.getString(4));
+
+    }
+    public void Rate(int driver_id,int trip_id,Context context,int rate)
+    {
+        UberDBHelper dbHelper = new UberDBHelper(context);
+        if(!dbHelper.ratedriver(driver_id,trip_id,rate))
+        {
+            Toast.makeText(context, "Error in Rating", Toast.LENGTH_SHORT).show();
+        }
         //TODO -customer books car
     }
     @Override
     public ArrayList<Trip> viewTripsDetails(Context context) {
+        SharedPreferences sharedPreferences=context.getSharedPreferences(sharedPrefFile,MODE_PRIVATE);
+        int customerID = sharedPreferences.getInt("id",0);
+        setId(customerID);
 
         UberDBHelper dbHelper = new UberDBHelper(context);
         ArrayList<Trip> tripArrayList=new ArrayList<>();

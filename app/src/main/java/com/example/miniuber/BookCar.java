@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Address;
@@ -16,8 +17,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.example.miniuber.users.trip.TimeConverter;
 import com.example.miniuber.users.trip.Trip;
 import com.example.miniuber.users.trip.TripCreation;
 import com.example.miniuber.users.trip.TripFacade;
@@ -25,6 +28,8 @@ import com.example.miniuber.users.trip.TripProxy;
 import com.example.miniuber.users.trip.complaint.ComplaintFacade;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.navigation.NavigationView;
+
+import java.util.Calendar;
 
 public class BookCar extends AppCompatActivity {
 
@@ -34,8 +39,8 @@ public class BookCar extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     Address pickPointAd=null,destinationAd=null;
-    String tripTime;
-
+    public static  String tripTime;
+    String[] times;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,15 +100,17 @@ public class BookCar extends AppCompatActivity {
         pickTimeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                tripTime=tripFacade.CalcTripTime(BookCar.this);
-               // Toast.makeText(BookCar.this, "Time set to "+tripTime, Toast.LENGTH_SHORT).show();
+
+
+              tripFacade.CalcTripTime(BookCar.this);
+
+
             }
         });
         ConfirmBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 TripCreation tripCreation=new TripProxy();
-                Toast.makeText(BookCar.this, "Time set to "+tripTime, Toast.LENGTH_LONG).show();
 
                 if (pickPointAd!=null&&destinationAd!=null&&tripTime!=null)
                 {
@@ -111,7 +118,7 @@ public class BookCar extends AppCompatActivity {
 
                 }
                 else{
-                    //Toast.makeText(BookCar.this, "Empty Fields", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(BookCar.this, "Empty Fields", Toast.LENGTH_SHORT).show();
                 }
             }
         });

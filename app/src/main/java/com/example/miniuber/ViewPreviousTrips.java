@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
+import com.example.miniuber.users.customer.Customer;
 import com.example.miniuber.users.trip.Trip;
 import com.example.miniuber.users.trip.PreviousTripsAdapter;
 
@@ -20,7 +21,8 @@ public class ViewPreviousTrips extends AppCompatActivity {
         previousTrips=findViewById(R.id.recyclerView);
         previousTrips.setLayoutManager(new LinearLayoutManager(ViewPreviousTrips.this));
         previousTrips.setHasFixedSize(true);
-        PreviousTripsAdapter adapter=new PreviousTripsAdapter(ViewPreviousTrips.this,fillTrips(),1,true);
+        ArrayList<Trip>tripArrayList=new Customer().viewTripsDetails(ViewPreviousTrips.this);
+        PreviousTripsAdapter adapter=new PreviousTripsAdapter(ViewPreviousTrips.this,tripArrayList,1,true);
         previousTrips.setAdapter(adapter);
 
 

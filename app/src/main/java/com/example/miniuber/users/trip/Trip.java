@@ -20,7 +20,7 @@ public class Trip  implements TripCreation{
 
     boolean hasADriver;
     private int customer;
-    private String driver;
+    private int driver;
     private String pickPoint;
     private String destination;
     private int carFare;
@@ -104,11 +104,11 @@ public class Trip  implements TripCreation{
         this.customer = customer;
     }
 
-    public String getDriver() {
+    public int getDriver() {
         return driver;
     }
 
-    public void setDriver(String driver) {
+    public void setDriver(int driver) {
         this.driver = driver;
     }
 

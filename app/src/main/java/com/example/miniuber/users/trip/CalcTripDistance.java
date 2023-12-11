@@ -23,7 +23,7 @@ public class CalcTripDistance {
     }
     public int calcPrice()
     {
-        return (int)distance*3;
+        return (int)(distance/1000)*3;
 
     }
 }

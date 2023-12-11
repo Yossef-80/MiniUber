@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.miniuber.R;
+import com.example.miniuber.users.customer.Customer;
 import com.google.android.material.button.MaterialButton;
 
 import java.util.ArrayList;
@@ -46,7 +47,9 @@ boolean viewBtn;
             holder.RateDriverBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    holder.ratingBar.getRating();
+                    int rate=(int)holder.ratingBar.getRating();
+                    Customer customer=new Customer();
+                    customer.Rate(trip.getDriver(),trip.getId(),context, rate);
                     //TODO -store in the database rating in trip and update driver rate
                 }
             });
