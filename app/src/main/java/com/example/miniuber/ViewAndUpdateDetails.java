@@ -7,6 +7,12 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.miniuber.users.customer.Customer;
+import com.example.miniuber.users.trip.Responsibilities.ConfirmPassword;
+import com.example.miniuber.users.trip.Responsibilities.DatabaseRegisterHandler;
+import com.example.miniuber.users.trip.Responsibilities.EmailExistanceHandler;
+import com.example.miniuber.users.trip.Responsibilities.EmailHandler;
+import com.example.miniuber.users.trip.Responsibilities.Handler;
+import com.example.miniuber.users.trip.Responsibilities.PasswordHandler;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -36,22 +42,37 @@ public class ViewAndUpdateDetails extends AppCompatActivity {
         //DataBase
         Name.setText(customer.getName());
         Email.setText(customer.getEmail());
+        Email.setVisibility(View.GONE);
         Password.setText(customer.getPassword());
+        ConfirmPassword.setText(customer.getPassword());
         Phone.setText(customer.getMobilePhone());
       //  Toast.makeText(this, "Email"+customer.getEmail()+" Name "+customer.getName(), Toast.LENGTH_SHORT).show();
         SaveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO read data from database then add to text fields which  aren't focusable
+                if(Name.isEnabled())
+                {
+                    customer.setName(Name.getText().toString());
+                    customer.setEmail(Email.getText().toString());
+                    customer.setPassword(Password.getText().toString());
+                    customer.setMobilePhone(Phone.getText().toString());
+
+
+                        Handler handler=new EmailHandler(Email);
+                        handler.setNextHandler(new PasswordHandler(Password)).setNextHandler(new ConfirmPassword(Password,ConfirmPassword));
+
+                        if(  handler.handle()){
+                            customer.UpdatePersonalInfo(ViewAndUpdateDetails.this);
+                            Toast.makeText(ViewAndUpdateDetails.this, "Data Updated successfully", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+
+
+
+                }
                 //then click edit button to focus on all fields then save saves data in database from textbox
 
-                if(Password.getText()!=ConfirmPassword.getText())
-                {
-                    ConfirmPassword.setError("Password doesn't match");
-                }
-                else{
-                    //TODO write data in database
-                }
+
             }
         });
         EditBtn.setOnClickListener(new View.OnClickListener() {

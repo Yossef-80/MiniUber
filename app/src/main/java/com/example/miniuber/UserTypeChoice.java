@@ -1,5 +1,7 @@
 package com.example.miniuber;
 
+import static com.example.miniuber.database.UberDBHelper.sharedPrefFile;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -22,8 +24,25 @@ public class UserTypeChoice extends AppCompatActivity {
         MaterialCardView DriverCardView=findViewById(R.id.DriverCard);
         MaterialCardView CustomerCardView=findViewById(R.id.CustomerCard);
 
+        SharedPreferences sharedPreferences=getSharedPreferences(sharedPrefFile,MODE_PRIVATE);
+        boolean userIsLogged = sharedPreferences.getBoolean("isLogged",false);
+        String userType=sharedPreferences.getString("UserType","");
 
-
+        if(userIsLogged&&userType.equalsIgnoreCase("customer"))
+        {
+            Intent intent=new Intent(UserTypeChoice.this, BookCar.class);
+            startActivity(intent);
+        }
+        else if(userIsLogged&&userType.equalsIgnoreCase("driver"))
+        {
+            Intent intent=new Intent(UserTypeChoice.this, SearchAvailableTrips.class);
+            startActivity(intent);
+        }
+        else if (userIsLogged&&userType.equalsIgnoreCase("employee"))
+        {
+            Intent intent=new Intent(UserTypeChoice.this, EmployeeMainPage.class);
+            startActivity(intent);
+        }
 
 
         EmpCardView.setOnClickListener(new View.OnClickListener() {

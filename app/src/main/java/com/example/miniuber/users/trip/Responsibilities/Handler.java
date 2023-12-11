@@ -18,7 +18,7 @@ public abstract class Handler {
     {
         if(next==null)
         {
-            return  false;
+            return  true;
         }
         return next.handle();
     }

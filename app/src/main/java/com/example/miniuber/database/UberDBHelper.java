@@ -318,13 +318,13 @@ public class UberDBHelper extends SQLiteOpenHelper {
         return tripArrayList;
     }
     //"create table complaints(id integer primary key Autoincrement,"+"user_id integer not null,comp_text text not null,comp_date text not null)"
-    public boolean createComplaint(int complaintId,int customerId,String complaintText,String complaintDate)
+    public boolean createComplaint(int customerId,String complaintText,String complaintDate)
     {
         SQLiteDatabase db=this.getWritableDatabase();
         ContentValues cv=new ContentValues();
 
 
-        cv.put("id",complaintId);
+        //cv.put("id",complaintId);
         cv.put("user_id",customerId);
         cv.put("comp_text",complaintText);
         cv.put("comp_date",complaintDate);

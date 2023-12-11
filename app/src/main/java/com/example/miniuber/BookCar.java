@@ -1,5 +1,7 @@
 package com.example.miniuber;
 
+import static com.example.miniuber.database.UberDBHelper.sharedPrefFile;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +11,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.Address;
 import android.os.Bundle;
 import android.text.InputType;
@@ -20,6 +23,7 @@ import android.widget.ImageButton;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.example.miniuber.users.customer.Customer;
 import com.example.miniuber.users.trip.TimeConverter;
 import com.example.miniuber.users.trip.Trip;
 import com.example.miniuber.users.trip.TripCreation;
@@ -152,8 +156,10 @@ public class BookCar extends AppCompatActivity {
                         public void onClick(DialogInterface dialogInterface, int i) {
                             //TODO -create Complaint
                             ComplaintFacade complaintFacade=new ComplaintFacade();
-                            complaintFacade.createComplaint(input.getText().toString());
-                            Toast.makeText(BookCar.this, input.getText().toString(), Toast.LENGTH_SHORT).show();
+                            complaintFacade.createComplaint(input.getText().toString(),BookCar.this);
+
+
+                           // Toast.makeText(BookCar.this, input.getText().toString(), Toast.LENGTH_SHORT).show();
                         }
                     });
                     builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -168,6 +174,13 @@ public class BookCar extends AppCompatActivity {
                  if (item.getItemId()==R.id.logOutItem) {
 
                         //TODO log out the user
+                     SharedPreferences mPreferences = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
+
+                     SharedPreferences.Editor preferencesEditor = mPreferences.edit();
+
+                     preferencesEditor.putBoolean("isLogged",false);
+                     preferencesEditor.apply();
+                     finish();
                 }
                  if (item.getItemId()==R.id.updateInfoItem) {
                      Intent intent=new Intent(BookCar.this, ViewAndUpdateDetails.class);

@@ -35,6 +35,16 @@ public class Customer extends User implements TripDetails {
 
         return  isRight;
     }
+    public void makeComplaint(Context context,String complaintText,String complaintDate)
+    {
+        UberDBHelper dbHelper = new UberDBHelper(context);
+        SharedPreferences sharedPreferences=context.getSharedPreferences(sharedPrefFile,MODE_PRIVATE);
+        int customerID = sharedPreferences.getInt("id",0);
+        if(!dbHelper.createComplaint(customerID,complaintText,complaintDate))
+        {
+            Toast.makeText(context, "the complaint assign has problems try again", Toast.LENGTH_SHORT).show();
+        }
+    }
 
     public void getData(Context context)
     {
@@ -94,8 +104,18 @@ public class Customer extends User implements TripDetails {
         preferencesEditor.apply();
     }
 
-    public boolean UpdatePersonalInfo(String name, String email, String password, String mobilePhone)
+    public void UpdatePersonalInfo(Context context)
     {
-        return false;
+        UberDBHelper dbHelper = new UberDBHelper(context);
+        SharedPreferences sharedPreferences=context.getSharedPreferences(sharedPrefFile,MODE_PRIVATE);
+        int customerID = sharedPreferences.getInt("id",0);
+
+       if(! dbHelper.updateCustomerPersonalInfo(customerID,name,Email,password,mobilePhone))
+       {
+           Toast.makeText(context, "Error in data update", Toast.LENGTH_SHORT).show();
+       }
+
+
     }
+
 }
