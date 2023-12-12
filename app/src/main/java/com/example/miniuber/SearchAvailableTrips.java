@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
+import com.example.miniuber.users.driver.Driver;
 import com.example.miniuber.users.trip.PreviousTripsAdapter;
 import com.example.miniuber.users.trip.Trip;
 
@@ -37,16 +38,7 @@ public class SearchAvailableTrips extends AppCompatActivity {
     }
     public ArrayList<Trip> fillTrips()
     {
-        ArrayList<Trip> tripArrayList=new ArrayList<>();
-
-        for (int i=0 ;i<10;i++)
-        { Trip trip=new Trip();
-            trip.setTripTime("Time"+String.valueOf(i));
-            trip.setDestination("Dist: "+String.valueOf(i));
-            trip.setPickPoint("Pick: "+String.valueOf(i));
-            trip.setCarFare(i);
-            tripArrayList.add(trip);
-        }
-        return tripArrayList;
+        Driver driver=new Driver();
+        return  driver.searchAvailableTrips(SearchAvailableTrips.this);
     }
 }

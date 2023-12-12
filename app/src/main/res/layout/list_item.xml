@@ -26,16 +26,20 @@
         android:text="Cost : 60"
         android:textSize="30sp"
 
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/TripTimeField"
         app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/PickPointField"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
         android:text="PickPoint : Cairo"
-        android:textSize="20sp"
 
-        app:layout_constraintTop_toBottomOf="@+id/TripTimeField" />
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@+id/TripTimeField"
+        tools:layout_editor_absoluteX="15dp" />
 
     <TextView
         android:id="@+id/DestField"

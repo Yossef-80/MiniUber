@@ -67,7 +67,7 @@ public class Customer extends User implements TripDetails {
         {
             Toast.makeText(context, "Error in Rating", Toast.LENGTH_SHORT).show();
         }
-        //TODO -customer books car
+
     }
     @Override
     public ArrayList<Trip> viewTripsDetails(Context context) {

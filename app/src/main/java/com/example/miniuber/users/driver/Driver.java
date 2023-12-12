@@ -5,6 +5,7 @@ import static com.example.miniuber.database.UberDBHelper.sharedPrefFile;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.widget.Toast;
 
 import com.example.miniuber.database.UberDBHelper;
 import com.example.miniuber.users.User;
@@ -99,13 +100,32 @@ public class Driver extends User implements TripDetails {
 
     @Override
     public ArrayList<Trip> viewTripsDetails(Context context) {
-        //TODO -create view trips details
-        return null;
+        SharedPreferences sharedPreferences=context.getSharedPreferences(sharedPrefFile,MODE_PRIVATE);
+        int driver_id = sharedPreferences.getInt("id",0);
+        setId(driver_id);
+
+        UberDBHelper dbHelper = new UberDBHelper(context);
+
+        return dbHelper.viewPreviousDriverTrips(driver_id);
     }
-    public List<Trip> searchAvailableTrips()
+    public ArrayList<Trip> searchAvailableTrips(Context context)
     {
-        //TODO -create view trip details
-        return null;
+        UberDBHelper dbHelper = new UberDBHelper(context);
+
+        return dbHelper.availableTripsForDriver();
+    }
+    public void AcceptTrip(Context context,int Trip_id)
+    {
+        SharedPreferences sharedPreferences=context.getSharedPreferences(sharedPrefFile,MODE_PRIVATE);
+        int driver_id = sharedPreferences.getInt("id",0);
+        setId(driver_id);
+
+        UberDBHelper dbHelper = new UberDBHelper(context);
+        if( dbHelper.isTripAvailableForDriver(Trip_id))
+        {
+            Toast.makeText(context, "Trip available for driver", Toast.LENGTH_SHORT).show();
+            dbHelper.AcceptTrip(id,Trip_id);
+        }
     }
 
 }

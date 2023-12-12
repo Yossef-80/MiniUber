@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.miniuber.R;
 import com.example.miniuber.users.customer.Customer;
+import com.example.miniuber.users.driver.Driver;
 import com.google.android.material.button.MaterialButton;
 
 import java.util.ArrayList;
@@ -53,6 +54,7 @@ boolean viewBtn;
                     //TODO -store in the database rating in trip and update driver rate
                 }
             });
+            holder.ratingBar.setRating(trip.getRate());
 
         }
         else if(CustomerOrDriver==2) {//driver
@@ -63,7 +65,15 @@ boolean viewBtn;
             holder.RateDriverBtn.setText("Accept Trip");
 
             holder.ratingBar.setVisibility(View.GONE);
+            holder.RateDriverBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Driver driver=new Driver();
+                    driver.AcceptTrip(context,trip.getId());
+                }
+            });
         }
+
 
     }
 

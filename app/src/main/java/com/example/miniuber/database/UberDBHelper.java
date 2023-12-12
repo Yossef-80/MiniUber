@@ -1,16 +1,16 @@
 package com.example.miniuber.database;
 
-import static android.content.Context.MODE_PRIVATE;
+
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.SharedPreferences;
+
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.widget.Toast;
 
-import com.example.miniuber.users.customer.Customer;
+
+
 import com.example.miniuber.users.driver.Car;
 import com.example.miniuber.users.driver.Driver;
 import com.example.miniuber.users.trip.Trip;
@@ -22,8 +22,8 @@ public class UberDBHelper extends SQLiteOpenHelper {
     public static String sharedPrefFile ="com.example.android.MiniUber";
 
     Context context;
-    private static String databaseName="MiniUberDB";
-    SQLiteDatabase uberDatabase;
+    private static final String databaseName="MiniUberDB";
+    //SQLiteDatabase uberDatabase;
 
 
     public UberDBHelper(Context context) {
@@ -145,7 +145,8 @@ public class UberDBHelper extends SQLiteOpenHelper {
         {
             cursor= db.rawQuery(query,null);
         }
-        db.close();
+
+
 
         return cursor.getCount()>0;
 
@@ -202,6 +203,7 @@ public class UberDBHelper extends SQLiteOpenHelper {
         cv.put("triptime",triptime);
         cv.put("carfare",carfare);
         cv.put("has_driver",false);
+        cv.put("rate",0);
         long results=db.insert("trip",null,cv);
         db.close();
 
@@ -232,24 +234,21 @@ public class UberDBHelper extends SQLiteOpenHelper {
         }
         SQLiteDatabase db=this.getReadableDatabase();
 
-        String query="select rate from driver where id= \""+driverid+"\"";
+        String query="select rate from driver where id= "+driverid;
         Cursor cursor=null;
-        if(db!=null)
-        {
             cursor= db.rawQuery(query,null);
-            db.close();
-        }
-        if(cursor!=null)
-        {
+            cursor.moveToFirst();
+
+
             int currRate=cursor.getInt(0);
-            int newRate=currRate+rate;
+            int newRate=(currRate+rate)/2;
             db=this.getWritableDatabase();
             ContentValues cv=new ContentValues();
             cv.put("rate",newRate);
             long results=db.update("driver",cv,"id=?",new String[]{String.valueOf(driverid)});
             return results!=-1;
-        }
-        return false;
+
+
 
     }
     //rate user trip
@@ -259,7 +258,7 @@ public class UberDBHelper extends SQLiteOpenHelper {
         ContentValues cv=new ContentValues();
         cv.put("rate",rate);
         long results=db.update("trip",cv,"id=?",new String[]{String.valueOf(tripid)});
-        db.close();
+
         return results!=-1;
     }
    // "create table trip(id integer primary key Autoincrement,"+"customer_id integer,driver_id integer,
@@ -277,6 +276,7 @@ public class UberDBHelper extends SQLiteOpenHelper {
         while (cursor.moveToNext())
         {
             Trip trip=new Trip();
+            trip.setId(cursor.getInt(0));
             trip.setCustomer(cursor.getInt(1));//customerID
             trip.setDriver(cursor.getInt(2));//DriverID
 
@@ -299,14 +299,14 @@ public class UberDBHelper extends SQLiteOpenHelper {
         String query="select * from trip where driver_id= \""+driver_id+"\"";
         Cursor cursor=null;
         cursor=db.rawQuery(query,null);
-        db.close();
+
         ArrayList<Trip>tripArrayList=new ArrayList<>();
         while (cursor.moveToNext())
         {
             Trip trip=new Trip();
             trip.setCustomer(cursor.getInt(1));//customerID
             trip.setDriver(cursor.getInt(2));//DriverID
-            trip.setRate(Integer.parseInt(cursor.getString(3)));
+            trip.setRate(cursor.getInt(3));
             trip.setPickPoint(cursor.getString(4));
             trip.setDestination(cursor.getString(5));
             trip.setTripTime(cursor.getString(6));
@@ -364,17 +364,18 @@ public class UberDBHelper extends SQLiteOpenHelper {
     public ArrayList<Trip> availableTripsForDriver()
     {
         SQLiteDatabase db=this.getReadableDatabase();
-        String query="select * from trip where has_driver= "+false;
+        String query="select * from trip where has_driver=0 ";
         Cursor cursor=null;
         cursor=db.rawQuery(query,null);
-        db.close();
+
         ArrayList<Trip>tripArrayList=new ArrayList<>();
         while (cursor.moveToNext())
         {
             Trip trip=new Trip();
+            trip.setId(cursor.getInt(0));
             trip.setCustomer(cursor.getInt(1));//customerID
             trip.setDriver(cursor.getInt(2));//DriverID
-            trip.setRate(Integer.parseInt(cursor.getString(3)));
+            trip.setRate(cursor.getInt(3));
             trip.setPickPoint(cursor.getString(4));
             trip.setDestination(cursor.getString(5));
             trip.setTripTime(cursor.getString(6));
@@ -391,12 +392,12 @@ public class UberDBHelper extends SQLiteOpenHelper {
     public boolean isTripAvailableForDriver(int trip_id)
     {
         SQLiteDatabase db=this.getReadableDatabase();
-        String query="select * from trip where id= "+trip_id;
+        String query="select * from trip where id= "+trip_id+"  and has_driver=0";
         Cursor cursor=null;
         cursor=db.rawQuery(query,null);
-        db.close();
+        cursor.moveToFirst();
 
-        return cursor != null;
+        return cursor.getCount()>0;
 
 
     }
@@ -421,7 +422,7 @@ public class UberDBHelper extends SQLiteOpenHelper {
 
 
         long results=db.update("trip",cv,"id=?",new String[]{String.valueOf(trip_id)});
-        db.close();
+
 
         return results != -1;
     }
