@@ -4,7 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
+import com.example.miniuber.users.driver.Car;
+import com.example.miniuber.users.driver.Driver;
+import com.example.miniuber.users.employee.Employee;
 import com.example.miniuber.users.trip.Responsibilities.ConfirmPassword;
 import com.example.miniuber.users.trip.Responsibilities.EmailExistanceHandler;
 import com.example.miniuber.users.trip.Responsibilities.EmailHandler;
@@ -17,6 +21,7 @@ import com.google.android.material.textfield.TextInputLayout;
 
 public class RegisterDriver extends AppCompatActivity {
     TextInputLayout carModel,carManufacturer,carYear;
+    TextInputEditText carModelEditText,carManufacturerEditText,carYearEditText;
     TextInputEditText name,email,password,confirmPassword,mobile;
     MaterialButton CreateDriverAccBtn;
     SwitchMaterial hasACar;
@@ -36,13 +41,62 @@ public class RegisterDriver extends AppCompatActivity {
         carManufacturer=findViewById(R.id.register_car_manufacturer);
         carYear=findViewById(R.id.register_car_year);
 
+        carModelEditText=findViewById(R.id.registerCarModelField);
+        carYearEditText=findViewById(R.id.register_car_manufacturer_year);
+        carManufacturerEditText=findViewById(R.id.register_car_manufacturer_field);
+        Employee employee=new Employee();
 
         CreateDriverAccBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Handler handler=new EmailHandler(email);
                     handler.setNextHandler(new EmailExistanceHandler(email,RegisterDriver.this)).setNextHandler(new PasswordHandler(password)).setNextHandler(new ConfirmPassword(password,confirmPassword));
-                handler.handle();
+                    if(hasACar.isChecked())
+                    {
+                        if(carManufacturerEditText.getText().toString().length()>1&&carModelEditText.getText().toString().length()>1&&carYearEditText.getText().toString().length()==4)
+                        {
+                            Car car=new Car();
+                            car.setYear(carYearEditText.getText().toString());
+                            car.setModel(carModelEditText.getText().toString());
+                            car.setManufacturer(carManufacturerEditText.getText().toString());
+                            car.setHasOwner(true);
+                            if(handler.handle())
+                            {
+                                Driver driver=new Driver();
+                                driver.setEmail(email.getText().toString());
+                                driver.setPassword(password.getText().toString());
+                                driver.setName(name.getText().toString());
+                                driver.setOwnACar(hasACar.isChecked());
+                                driver.setHasACar(hasACar.isChecked());
+                                driver.setRate(0);
+                                driver.setMobilePhone(mobile.getText().toString());
+                                int carId=employee.AddCar(car,RegisterDriver.this);
+                                driver.setCarID(carId);
+                                employee.RegisterDriver(driver,RegisterDriver.this);
+
+                            }
+
+                        }
+                        else{
+                            Toast.makeText(RegisterDriver.this, "Missing Fields", Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                    else{
+                        if(handler.handle())
+                        {
+                            Driver driver=new Driver();
+                            driver.setEmail(email.getText().toString());
+                            driver.setPassword(password.getText().toString());
+                            driver.setName(name.getText().toString());
+                            driver.setOwnACar(hasACar.isChecked());
+                            driver.setHasACar(hasACar.isChecked());
+                            driver.setRate(0);
+                            driver.setMobilePhone(mobile.getText().toString());
+                            employee.RegisterDriver(driver,RegisterDriver.this);
+                        }
+                    }
+
             }
         });
         hasACar.setOnClickListener(new View.OnClickListener() {

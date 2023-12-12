@@ -81,7 +81,7 @@ public class Customer extends User implements TripDetails {
        return tripArrayList;
     }
 
-    @Override
+
     public boolean Register(Context context) {
         UberDBHelper dbHelper = new UberDBHelper(context);
         boolean isRight=dbHelper.RegisterCustomer( name, mobilePhone, Email, password);

@@ -71,14 +71,14 @@ public class Driver extends User implements TripDetails {
         return  isRight;
     }
 
-    @Override
+    /*@Override
     public boolean Register(Context context) {
 
         UberDBHelper dbHelper = new UberDBHelper(context);
         boolean isRight=dbHelper.RegisterDriver( name, mobilePhone, Email, password,OwnACar,hasACar, carID,rate);
         return isRight;
     }
-
+*/
     @Override
     public void saveUserData(Context context) {
         SharedPreferences mPreferences = context.getSharedPreferences(sharedPrefFile, MODE_PRIVATE);

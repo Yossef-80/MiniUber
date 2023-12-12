@@ -5,9 +5,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.example.miniuber.users.driver.Driver;
 import com.example.miniuber.users.driver.DriverNotHaveCarAdapter;
+import com.example.miniuber.users.employee.Employee;
 
 import java.util.ArrayList;
 
@@ -21,20 +23,15 @@ public class DriverNotHaveCar extends AppCompatActivity {
         Drivers=findViewById(R.id.DriverNotHaveCarRecycler);
         Drivers.setLayoutManager(new LinearLayoutManager(DriverNotHaveCar.this));
         Drivers.setHasFixedSize(true);
-        DriverNotHaveCarAdapter adapter=new DriverNotHaveCarAdapter(DriverNotHaveCar.this,fillDrivers());
+        DriverNotHaveCarAdapter adapter=new DriverNotHaveCarAdapter(DriverNotHaveCar.this,fillDrivers(),false);
         Drivers.setAdapter(adapter);
     }
 
     private ArrayList<Driver> fillDrivers() {
-        ArrayList<Driver> DriverArrayList=new ArrayList<>();
+        Employee employee=new Employee();
 
-        for (int i=0 ;i<10;i++)
-        { Driver driver=new Driver();
-            driver.setName("Youssef");
-            driver.setMobilePhone("0123456789"+ java.lang.String.valueOf(i));
-            driver.setEmail("youssef@mail.com");
-            DriverArrayList.add(driver);
-        }
-        return DriverArrayList;
+        ArrayList<Driver> driverArrayList=employee.viewDriversWithNoCar(DriverNotHaveCar.this);
+
+      return driverArrayList;
     }
 }

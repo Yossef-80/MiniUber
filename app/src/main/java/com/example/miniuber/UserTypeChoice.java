@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.miniuber.users.UserFactory;
+import com.example.miniuber.users.employee.Employee;
 import com.google.android.material.card.MaterialCardView;
 
 public class UserTypeChoice extends AppCompatActivity {
@@ -27,7 +28,8 @@ public class UserTypeChoice extends AppCompatActivity {
         SharedPreferences sharedPreferences=getSharedPreferences(sharedPrefFile,MODE_PRIVATE);
         boolean userIsLogged = sharedPreferences.getBoolean("isLogged",false);
         String userType=sharedPreferences.getString("UserType","");
-
+      //  Employee employee=new Employee();
+     //   employee.CreateDemoAcc(UserTypeChoice.this);
         if(userIsLogged&&userType.equalsIgnoreCase("customer"))
         {
             Intent intent=new Intent(UserTypeChoice.this, BookCar.class);

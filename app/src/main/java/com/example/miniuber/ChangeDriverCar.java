@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.example.miniuber.users.driver.DriverNotHaveCarAdapter;
-
+import com.example.miniuber.users.employee.Employee;
 
 
 import java.util.ArrayList;
@@ -26,21 +26,14 @@ public class ChangeDriverCar extends AppCompatActivity {
         Drivers=findViewById(R.id.DriverNotHaveCarRecycler);
         Drivers.setLayoutManager(new LinearLayoutManager(ChangeDriverCar.this));
         Drivers.setHasFixedSize(true);
-        DriverNotHaveCarAdapter adapter=new DriverNotHaveCarAdapter(ChangeDriverCar.this,fillDrivers());
+        DriverNotHaveCarAdapter adapter=new DriverNotHaveCarAdapter(ChangeDriverCar.this,fillDrivers(),true);
         Drivers.setAdapter(adapter);
 
 
     }
     private ArrayList<Driver> fillDrivers() {
-        ArrayList<Driver> DriverArrayList=new ArrayList<>();
 
-        for (int i=0 ;i<10;i++)
-        { Driver driver=new Driver();
-            driver.setName("Youssef");
-            driver.setMobilePhone("0987654321"+ java.lang.String.valueOf(i));
-            driver.setEmail("youssef_haveCar@mail.com");
-            DriverArrayList.add(driver);
-        }
-        return DriverArrayList;
+        Employee employee=new Employee();
+        return employee.viewDriversNotOwnCar(ChangeDriverCar.this);
     }
 }

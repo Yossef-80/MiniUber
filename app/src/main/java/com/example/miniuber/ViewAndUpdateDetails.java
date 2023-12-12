@@ -8,8 +8,6 @@ import android.widget.Toast;
 
 import com.example.miniuber.users.customer.Customer;
 import com.example.miniuber.users.trip.Responsibilities.ConfirmPassword;
-import com.example.miniuber.users.trip.Responsibilities.DatabaseRegisterHandler;
-import com.example.miniuber.users.trip.Responsibilities.EmailExistanceHandler;
 import com.example.miniuber.users.trip.Responsibilities.EmailHandler;
 import com.example.miniuber.users.trip.Responsibilities.Handler;
 import com.example.miniuber.users.trip.Responsibilities.PasswordHandler;

@@ -11,6 +11,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
 
 import com.example.miniuber.users.customer.Customer;
+import com.example.miniuber.users.driver.Car;
+import com.example.miniuber.users.driver.Driver;
 import com.example.miniuber.users.trip.Trip;
 import com.example.miniuber.users.trip.complaint.Complaint;
 
@@ -346,7 +348,7 @@ public class UberDBHelper extends SQLiteOpenHelper {
         String query="select * from complaints";
         Cursor cursor=null;
         cursor=db.rawQuery(query,null);
-        db.close();
+
        while (cursor.moveToNext())
        {
            Complaint complaint=new Complaint();
@@ -431,7 +433,7 @@ public class UberDBHelper extends SQLiteOpenHelper {
     // year number not null,
     // hasOwner boolean not null)");
 
-    public boolean AddCar(String manufacturer,String model,int year,boolean hasOwner)
+    public int AddCar(String manufacturer,String model,int year,boolean hasOwner)
     {
         SQLiteDatabase db=this.getWritableDatabase();
         ContentValues cv=new ContentValues();
@@ -444,8 +446,12 @@ public class UberDBHelper extends SQLiteOpenHelper {
 
         long results=db.insert("car",null,cv);
         db.close();
-
-        return results != -1;
+        SQLiteDatabase db2=this.getReadableDatabase();
+        String query="select last_insert_rowid()";
+        Cursor cursor=null;
+        cursor=db2.rawQuery(query,null);
+        cursor.moveToFirst();
+        return (int)results;
 
     }
     public boolean isDriverHasCar(int driver_id)
@@ -454,7 +460,6 @@ public class UberDBHelper extends SQLiteOpenHelper {
         String query="select * from driver where id= "+driver_id;
         Cursor cursor=null;
         cursor=db.rawQuery(query,null);
-        db.close();
 
         return cursor != null;
 
@@ -480,9 +485,14 @@ public class UberDBHelper extends SQLiteOpenHelper {
 
 
         long results=db.update("driver",cv,"id=?",new String[]{String.valueOf(driver_id)});
-        db.close();
 
-        return results != -1;
+
+        ContentValues cv2=new ContentValues();
+        cv2.put("hasOwner",true);
+
+        long results2=db.update("car",cv2,"id=?",new String[]{String.valueOf(car_id)});
+
+        return results != -1&&results2!=-1;
 
     }
     //"create table car(
@@ -498,10 +508,10 @@ public class UberDBHelper extends SQLiteOpenHelper {
         String query="select car_id from driver where id= "+driver_id;
         Cursor cursor=null;
         cursor=db.rawQuery(query,null);
+        cursor.moveToFirst();
         int old_car_id=cursor.getInt(0);
         cursor.close();
 
-        db.close();
          db=this.getWritableDatabase();
         ContentValues cv=new ContentValues();
 
@@ -513,7 +523,13 @@ public class UberDBHelper extends SQLiteOpenHelper {
         cv2.put("hasOwner",false);
 
         long results2=db.update("car",cv2,"id=?",new String[]{String.valueOf(old_car_id)});
-        return results != -1 && results2 != -1;
+
+
+        ContentValues cv3=new ContentValues();
+        cv3.put("hasOwner",true);
+
+        long results3=db.update("car",cv3,"id=?",new String[]{String.valueOf(new_car_id)});
+        return results != -1 && results2 != -1&&results3!=-1;
 
     }
     public boolean isTheEmailMade(String email)
@@ -555,8 +571,95 @@ public class UberDBHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
+    public void createDemoEmpAcc()
+    {
+        SQLiteDatabase db=this.getWritableDatabase();
+        ContentValues cv=new ContentValues();
 
 
+
+        cv.put("name","emp");
+        cv.put("email","emp@gmail.com");
+        cv.put("password","Admin12345");
+
+
+        long results=db.insert("employee",null,cv);
+        db.close();
+
+
+    }
+    public ArrayList<Driver> viewDriverWithNoCar()
+    {
+        SQLiteDatabase db=this.getReadableDatabase();
+        String query="select * from driver where hasCar =0";
+        Cursor cursor=null;
+        cursor=db.rawQuery(query,null);
+       // cursor.moveToFirst();
+        ArrayList<Driver>driverArrayList=new ArrayList<>();
+        while(cursor.moveToNext())
+        {
+            Driver driver=new Driver();
+            driver.setId(cursor.getInt(0));
+            driver.setName(cursor.getString(1));
+            driver.setMobilePhone(cursor.getString(2));
+            driver.setEmail(cursor.getString(3));
+            driver.setPassword(cursor.getString(4));
+            driver.setOwnACar(cursor.getInt(5)>1);
+            driver.setHasACar(cursor.getInt(6)>1);
+            driver.setCarID(cursor.getInt(7));
+            driver.setRate(cursor.getInt(8));
+            driverArrayList.add(driver);
+        }
+        cursor.close();
+        return driverArrayList;
+    }
+
+
+    public ArrayList<Driver> viewDriverNotOwnCar()
+    {
+        SQLiteDatabase db=this.getReadableDatabase();
+        String query="select * from driver where ownCar =0";
+        Cursor cursor=null;
+        cursor=db.rawQuery(query,null);
+        // cursor.moveToFirst();
+        ArrayList<Driver>driverArrayList=new ArrayList<>();
+        while(cursor.moveToNext())
+        {
+            Driver driver=new Driver();
+            driver.setId(cursor.getInt(0));
+            driver.setName(cursor.getString(1));
+            driver.setMobilePhone(cursor.getString(2));
+            driver.setEmail(cursor.getString(3));
+            driver.setPassword(cursor.getString(4));
+            driver.setOwnACar(cursor.getInt(5)>1);
+            driver.setHasACar(cursor.getInt(6)>1);
+            driver.setCarID(cursor.getInt(7));
+            driver.setRate(cursor.getInt(8));
+            driverArrayList.add(driver);
+        }
+        cursor.close();
+        return driverArrayList;
+    }
+
+    public ArrayList<Car> viewAvailableCars()
+    {
+        SQLiteDatabase db=this.getReadableDatabase();
+        String query="select * from car where hasOwner =0";
+        Cursor cursor=null;
+        cursor=db.rawQuery(query,null);
+        ArrayList<Car>carArrayList=new ArrayList<>();
+        while (cursor.moveToNext())
+        {
+            Car car=new Car();
+            car.setId(cursor.getInt(0));
+            car.setManufacturer(cursor.getString(1));
+            car.setModel(cursor.getString(2));
+            car.setYear(cursor.getString(3));
+            car.setHasOwner(cursor.getInt(4)>0);
+            carArrayList.add(car);
+        }
+        return carArrayList;
+    }
 
 
 

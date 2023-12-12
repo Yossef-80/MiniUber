@@ -44,7 +44,7 @@ public abstract class  User  {
     }
 
     public  abstract boolean Login(String userName, String password, Context context);
-    public abstract boolean Register(Context context);
+
     public abstract void saveUserData(Context context);
 
 }

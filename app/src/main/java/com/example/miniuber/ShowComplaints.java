@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
+import com.example.miniuber.users.employee.Employee;
 import com.example.miniuber.users.trip.complaint.Complaint;
 import com.example.miniuber.users.trip.complaint.ComplaintsAdapter;
 
@@ -26,14 +27,7 @@ public class ShowComplaints extends AppCompatActivity {
     }
 
     private ArrayList<Complaint> fillComplaints() {
-        ArrayList<Complaint> ComplaintList=new ArrayList<>();
-
-        for (int i=0 ;i<10;i++)
-        { Complaint complaint=new Complaint();
-            complaint.setComplaintDate("20/11/"+String.valueOf(i));
-            complaint.setComplaintText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eu enim consequat, interdum tellus et, blandit erat. Nullam quis dolor risus. Integer eget tincidunt elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Curabitur sagittis, metus vel vulputate tristique, sem ex posuere diam, lobortis rhoncus erat metus ac nisi. Morbi a metus sed lorem cursus malesuada sed et dui. Integer et diam euismod, porttitor urna in, consequat diam. Fusce est ex, hendrerit sed elit at, mattis auctor dolor. Aliquam pellentesque a erat sed suscipit. Curabitur efficitur ut libero aliquet porta.");
-            ComplaintList.add(complaint);
-        }
-        return ComplaintList;
+        Employee employee=new Employee();
+        return employee.ViewComplaints(ShowComplaints.this);
     }
 }

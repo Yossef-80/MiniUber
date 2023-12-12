@@ -1,7 +1,7 @@
 package com.example.miniuber.users.driver;
 
 public class Car {
-    private String id;
+    private int id;
     private String model;
     private String manufacturer;
     private String year;
@@ -15,11 +15,11 @@ public class Car {
         this.hasOwner = hasOwner;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

@@ -6,12 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.miniuber.users.User;
 import com.example.miniuber.users.customer.Customer;
-import com.example.miniuber.users.driver.Driver;
 import com.example.miniuber.users.trip.Responsibilities.ConfirmPassword;
-import com.example.miniuber.users.trip.Responsibilities.DatabaseLoginHandler;
-import com.example.miniuber.users.trip.Responsibilities.DatabaseRegisterHandler;
+import com.example.miniuber.users.trip.Responsibilities.CustomerDatabaseRegisterHandler;
 import com.example.miniuber.users.trip.Responsibilities.EmailExistanceHandler;
 import com.example.miniuber.users.trip.Responsibilities.EmailHandler;
 import com.example.miniuber.users.trip.Responsibilities.Handler;
@@ -62,7 +59,7 @@ public class Register extends AppCompatActivity {
                 customer.setPassword(password.getText().toString());
                 customer.setMobilePhone(mobile.getText().toString());
                 Handler handler=new EmailHandler(email);
-                handler.setNextHandler(new EmailExistanceHandler(email,Register.this)).setNextHandler(new PasswordHandler(password)).setNextHandler(new ConfirmPassword(password,confirmPassword)).setNextHandler(new DatabaseRegisterHandler(customer,Register.this));
+                handler.setNextHandler(new EmailExistanceHandler(email,Register.this)).setNextHandler(new PasswordHandler(password)).setNextHandler(new ConfirmPassword(password,confirmPassword)).setNextHandler(new CustomerDatabaseRegisterHandler(customer,Register.this));
                 handler.handle();
                 Toast.makeText(Register.this, "Account Created Successfully", Toast.LENGTH_SHORT).show();
                 finish();

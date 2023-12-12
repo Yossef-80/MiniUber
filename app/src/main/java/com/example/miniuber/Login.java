@@ -1,5 +1,7 @@
 package com.example.miniuber;
 
+import static com.example.miniuber.database.UberDBHelper.sharedPrefFile;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -53,13 +55,29 @@ public class Login extends AppCompatActivity {
            @Override
            public void onClick(View view) {
                Handler handler=new EmailHandler(email);
-               handler.setNextHandler(new PasswordHandler(password).setNextHandler(new DatabaseLoginHandler(user,email.getText().toString(),password.getText().toString(),Login.this)));
+               handler.setNextHandler(new PasswordHandler(password)).setNextHandler(new DatabaseLoginHandler(user,email.getText().toString(),password.getText().toString(),Login.this));
                 if(  handler.handle())
                 {
 
                     Toast.makeText(Login.this, "Successful login", Toast.LENGTH_SHORT).show();
-                    Intent intent1=new Intent(Login.this,BookCar.class);
-                    startActivity(intent1);
+                    SharedPreferences sharedPreferences=getSharedPreferences(sharedPrefFile,MODE_PRIVATE);
+                    String customerType = sharedPreferences.getString("UserType","");
+                    if(customerType.equalsIgnoreCase("driver"))
+                    {
+                        Intent intent1=new Intent(Login.this,SearchAvailableTrips.class);
+                        startActivity(intent1);
+                    }
+                    else if(customerType.equalsIgnoreCase("employee"))
+                    {
+                        Intent intent1=new Intent(Login.this,EmployeeMainPage.class);
+                        startActivity(intent1);
+                    }
+                    else if(customerType.equalsIgnoreCase("customer"))
+                    {
+                        Intent intent1=new Intent(Login.this,BookCar.class);
+                        startActivity(intent1);
+                    }
+
 
                 }
 
