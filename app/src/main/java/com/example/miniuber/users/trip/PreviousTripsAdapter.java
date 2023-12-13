@@ -68,8 +68,8 @@ boolean viewBtn;
             holder.RateDriverBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Driver driver=new Driver();
-                    driver.AcceptTrip(context,trip.getId());
+                    AcceptTrip tripProxy=new AcceptTripProxy();
+                    tripProxy.AcceptTrip(context,trip.getId());
                 }
             });
         }

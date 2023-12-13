@@ -9,13 +9,13 @@ import android.widget.Toast;
 
 import com.example.miniuber.database.UberDBHelper;
 import com.example.miniuber.users.User;
+import com.example.miniuber.users.trip.AcceptTrip;
 import com.example.miniuber.users.trip.Trip;
 import com.example.miniuber.users.trip.TripDetails;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class Driver extends User implements TripDetails {
+public class Driver extends User implements TripDetails, AcceptTrip {
 
 
     private boolean OwnACar;
