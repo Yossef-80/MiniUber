@@ -239,9 +239,16 @@ public class UberDBHelper extends SQLiteOpenHelper {
             cursor= db.rawQuery(query,null);
             cursor.moveToFirst();
 
-
+        int newRate;
             int currRate=cursor.getInt(0);
-            int newRate=(currRate+rate)/2;
+            if(currRate==0)
+            {
+                newRate=rate;
+            }
+            else{
+                newRate=(currRate+rate)/2;
+            }
+
             db=this.getWritableDatabase();
             ContentValues cv=new ContentValues();
             cv.put("rate",newRate);
@@ -619,7 +626,7 @@ public class UberDBHelper extends SQLiteOpenHelper {
     public ArrayList<Driver> viewDriverNotOwnCar()
     {
         SQLiteDatabase db=this.getReadableDatabase();
-        String query="select * from driver where ownCar =0";
+        String query="select * from driver where ownCar =0 and hasCar=1";
         Cursor cursor=null;
         cursor=db.rawQuery(query,null);
         // cursor.moveToFirst();

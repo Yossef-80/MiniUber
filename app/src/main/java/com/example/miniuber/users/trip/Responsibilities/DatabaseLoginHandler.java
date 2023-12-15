@@ -24,6 +24,7 @@ public class DatabaseLoginHandler extends Handler{
 
     @Override
     public boolean handle() {
+
         if(!user.Login(username,password,context))
         {
             Toast.makeText(context, "the user name of password may be wrong", Toast.LENGTH_LONG).show();
