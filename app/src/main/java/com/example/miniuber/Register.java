@@ -60,9 +60,16 @@ public class Register extends AppCompatActivity {
                 customer.setMobilePhone(mobile.getText().toString());
                 Handler handler=new EmailHandler(email);
                 handler.setNextHandler(new EmailExistanceHandler(email,Register.this)).setNextHandler(new PasswordHandler(password)).setNextHandler(new ConfirmPassword(password,confirmPassword)).setNextHandler(new CustomerDatabaseRegisterHandler(customer,Register.this));
-                handler.handle();
-                Toast.makeText(Register.this, "Account Created Successfully", Toast.LENGTH_SHORT).show();
-                finish();
+                if(handler.handle())
+                {
+                    Toast.makeText(Register.this, "Account Created Successfully", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+                else{
+                    Toast.makeText(Register.this, "Wrong Data", Toast.LENGTH_SHORT).show();
+
+                }
+
             }
         });
 
